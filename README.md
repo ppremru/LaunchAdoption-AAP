@@ -39,6 +39,6 @@ The community needs to agree upon a set of collaborative sessions to align the c
 
 ---
 
-> :link: *[This repo in web format](https://ppremru.github.io/LaunchFieldKitAdoption/)*  
+> :link: *[This repo in web format](https://ppremru.github.io/LaunchAdoption-AAP/)*  
 > :star: *Favorites*
 ---
