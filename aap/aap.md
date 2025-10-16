@@ -24,6 +24,7 @@ Given this approach, this topic is NOT covering installation nor day 2 operation
 ### Labs
 
 - [Interactive labs for Red Hat Ansible Automation Platform](https://www.redhat.com/en/interactive-labs/ansible) :star:
+- [Red Hat Ansible Automation Platform learning hub](https://www.redhat.com/en/technologies/management/ansible/learn) ⭐
 
 ### Reading Material and References
 
