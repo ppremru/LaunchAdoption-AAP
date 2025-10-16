@@ -30,6 +30,7 @@ Before using the Ansible Automation Platform, the enablement goal is to develop 
 ### Labs
 
 - [Ansible Basics: Automation Technical Overview](https://www.redhat.com/en/services/training/do007-ansible-essentials-simplicity-automation-technical-overview) (no charge)
+- [Red Hat Ansible Automation Platform learning hub](https://www.redhat.com/en/technologies/management/ansible/learn) 🥇
 
 ### Reading Material and References
 
