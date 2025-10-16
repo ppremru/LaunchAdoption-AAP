@@ -24,7 +24,7 @@ Our **domain**, **community**, and **practices**:
 * [Foundational Tools](./foundation/foundation.md)
 * [Ansible Core Skills](./ansible/ansible.md)
 * [Introduction to Containerization](./container/container.md)
-* [Ansible Automation Platform (AAP)](./ansible/aap.md)
+* [Ansible Automation Platform (AAP)](./aap/aap.md)
 
 ### Product Adoption Sessions
 
