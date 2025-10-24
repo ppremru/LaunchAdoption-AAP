@@ -15,7 +15,14 @@ The sessions are expected to be a lunch and learn approach - less than an hour a
 | **Facilitator** | Red Hat Adoption Architect utilizing an online white board |
 | **Frequency** | Bi-weekly, 1 hour per session (approx 6 sessions) |
 | **Audience** | Project Team Members |
-| **1-Hour Agenda** | <ul><li><strong>Introduction:</strong> Set the stage (5 min)</li><li><strong>Technical Presentation:</strong> Core topic deep-dive (20 min)</li><li><strong>Group Discussion:</strong> Apply topic to the team's mission (15 min)</li><li><strong>Retro/Next Steps:</strong> Key takeaways and topic planning for the subsequent session (5 min)</li></ul> |
+| **1-Hour Agenda** | Intro, Tech Presentation, Group Discussion, Retro |
+
+**Agenda**:
+
+* Introduction: Set the stage (5 min)
+* Technical Presentation: Core topic deep-dive (20 min)
+* Group Discussion: Apply topic to the team's mission (15 min)
+* Retro/Next Steps: Key takeaways and topic planning for the subsequent session (5 min) |
 
 ### AAP Adoption Enablement Roadmap
 

@@ -11,9 +11,9 @@ From the Adoption point of view -- we aim to master the creation, management, an
 Our **domain**, **community**, and **practices**:
 
 * [Why a CoP Focused on Enablement?](./about/aboutCoP.md)
+* [Practice: Enablement Framework](./about/aboutPractice.md)
 * [Domain: Team Mission](./about/aboutDomain.md)
 * [Community: Team Profiles](./about/aboutCommunity.md)
-* [Practice: Enablement Framework](./about/aboutPractice.md)
 
 > Tip: [Formatting Files for this Repo](./about/aboutFormat.md)
 
