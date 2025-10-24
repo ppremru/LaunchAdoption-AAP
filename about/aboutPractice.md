@@ -1,40 +1,37 @@
 # Our Practice: Enablement Framework
 
-Our framework includes leaning into product adoption and curating onboarding topics.   
+Our framework consists of leaning into product adoption by curating onboarding topics that are specific to the needs of the team.   
 
 ## Product Adoption Sessions
 
 The expectation is that the CoP has a set of collaborative sessions initially facilitated by a Red Hat Architect that specializes in adoption.  The goal of the sessions are to tune the domain and help the community curate the list of onboarding topics. 
 
-### Suggestion of Adoption Session Format
+### AAP Adoption Session Format
 
-* **Facilitator:** Red Hat Adoption Architect
-* **Frequency:** Bi-weekly, 1 hour per session (approx 6 sessions)
-* **Audience:** Community
-* **1-Hour Agenda:**
-  * **Introduction:** Setting the stage (5 min)
-  * **Technical Presentation:** The core topic deep-dive (20 min)
-  * **Group Discussion:** Applying the topic to the team's mission (15 min)
-  * **Retro/Next Steps:** Key takeaways and topic planning for the subsequent session (5 min)
+The sessions are expected to be a lunch and learn approach - less than an hour at a time and a cadence that is convenient for the team.
 
-### Suggestion of Sessions
+| Info | Details |
+| :--- | :--- |
+| **Facilitator** | Red Hat Adoption Architect utilizing an online white board |
+| **Frequency** | Bi-weekly, 1 hour per session (approx 6 sessions) |
+| **Audience** | Project Team Members |
+| **1-Hour Agenda** | <ul><li><strong>Introduction:</strong> Set the stage (5 min)</li><li><strong>Technical Presentation:</strong> Core topic deep-dive (20 min)</li><li><strong>Group Discussion:</strong> Apply topic to the team's mission (15 min)</li><li><strong>Retro/Next Steps:</strong> Key takeaways and topic planning for the subsequent session (5 min)</li></ul> |
 
-Depending on the team skill set, the sessions might be combined:
+### AAP Adoption Enablement Roadmap
 
-| \# | Topic | Outcome | Notes |
-| :---: | :--- | :--- | :--- |
-| 1 | **Kickoff** | Set goals for the CoP (Domain, Community and Practices) | Discuss adoption maturity |
-| 2 | **Foundation** | Level set concepts and tools and Intro to Ansible | RHEL, RHLS, Lint, VScode, Git, Playbook|
-| 3 | **Ansible 101** | Ansible Basics | Playbooks, Inventories, Troubleshooting, Variables|
-| 4 | **More Ansible** | More Ansible | Module, Plugins, Roles, Galaxy and Ansible Automation Hub|
-| 5 | **Containerization-101** | Prepare for AAP | Intro to Podman, Quay|
-| 6 | **AAP Intro and Use Cases** | Intro to AAP and Discussion of Use cases| |
-| 7 | **More on AAP** | TBD | Deep dive into Use Cases|
+Depending on the team skill set, the sessions may cover more or less than one milestone:
 
-> Note:
-> The sessions are expected to be lunch and learn approach - less than an hour. 
+ Milestone # | Title                                           | Focus Area                                  |
+| :---------- | :---------------------------------------------- | :------------------------------------------ |
+| 1           | **CoP Kickoff** | Collaborating & Agreeing on Goals, Cadence, & Member Commitment |
+| 2           | **Fundamental Concepts** | Confirming Core Concepts (IaC, GitOps) & Tools (Git, YAML, VSCode) |
+| 3           | **Ansible Building Blocks** | Authoring Automation with Playbooks & Collections |
+| 4           | **Containerization Essentials** | Utilizing Containers with Podman & Image Registry |
+| 5           | **AAP Architecture** | Navigating Execution Environments, Advanced Workflows & Repositories |
+| 6           | **Practical Application** | Identifying Business Use Cases to Drive Value |
+| 7           | **Scale Automation** | Building a Community of Excellence with Best Practices |
 
-## Onboarding Topics
+## Onboarding Material
 
 Acknowledging diverse backgrounds, learning styles, and capabilities, team member enablement should be adaptable. This framework serves as a guide, not a rigid rule set.  Examples of enablement materials:
 

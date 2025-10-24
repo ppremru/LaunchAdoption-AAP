@@ -1,8 +1,10 @@
 # Launch Adoption - AAP
 
-Welcome! This repository serves as the central hub for our  **Community of Practice (CoP) for AAP Enablement**. Our CoP goal is to streamline the onboarding experience for members that are either new to the project team or new to Ansible by curating tips and links which guide independent learning. Ultimately, the outcome of simplified user training and onboarding increases product adoption (maturity) for the team.
+Welcome!  This repository serves as the entry point for our **Community of Practice (CoP) for Ansible Automation Platform (AAP) developer enablement**.  
 
-The CoP maintains a versioned set of *living documents* that provide recommendations - it will take time to cultivate for the team.
+From the Adoption point of view -- we aim to master the creation, management, and scaling of automation content within the Ansible Automation Platform.  Our first step is to streamline the onboarding experience for team members that are either new to the project team or new to Ansible by curating tips and links which guide independent learning. Ultimately, the outcome of simplified user training and onboarding increases product adoption (maturity) for the team.
+
+> *The CoP maintains a versioned set of living documents that provide recommendations - it will take a commitment of time and effort  to cultivate this repository specifically for a team.  Notice the entry point is automation developer, not installation, infrastructure management, nor day-to-day administration of the AAP environment itself.*
 
 ## About our CoP for AAP Enablement
 
@@ -17,25 +19,37 @@ Our **domain**, **community**, and **practices**:
 
 ## Our Enablement Framework
 
+Our Enablement Framework aligns **Onboarding Topics** with **Product Adoption Sessions**.
+
 ### Onboarding Topics
+
+The **Onboarding Topics** are grouped into sections in order to support a crawl, walk, run approach to AAP enablement.
 
 * [Red Hat: Core Red Hat Sites & Programs](./about/aboutRHResources.md) :star:
 * [Red Hat Enterprise Linux (RHEL)](./rhel/rhel.md)
-* [Foundational Tools](./foundation/foundation.md)
-* [Ansible Core Skills](./ansible/ansible.md)
-* [Introduction to Containerization](./container/container.md)
+* [Foundational Concepts](./foundation/foundation.md)
+* [Ansible Building Blocks](./ansible/ansible.md)
+* [Containerization Essentials](./container/container.md)
 * [Ansible Automation Platform (AAP)](./aap/aap.md)
 
 ### Product Adoption Sessions
 
-The community needs to agree upon a set of collaborative sessions to align the community and domain -- and keep a log of events.  Sessions to consider (refer to our [Practice Framework](./about/aboutPractice.md))
+The **Product Adoption Sessions** provide the team with a roadmap to increase AAP Enablement.  It is expected that the sessions are facilitated by a Red Hat Adoption Specialist Architect.   The community (team) should agree upon a set of collaborative sessions to align the community and domain -- and keep a log of events.  
 
-* Kickoff
-* Foundational Tools, Intro to Ansible
-* More Ansible
-* Intro to containerization and AAP
-* Use cases in AAP
-* More AAP 
+#### AAP Adoption Roadmap
+
+Refer to our [Practice Framework](./about/aboutPractice.md) for details.  Here is a summary of recommended milestones to drive sessions:
+
+| Milestone # | Title                                           | Focus Area                                  |
+| :---------- | :---------------------------------------------- | :------------------------------------------ |
+| 1           | **CoP Kickoff** | Collaborating & Agreeing on Goals, Cadence, & Member Commitment |
+| 2           | **Fundamental Concepts** | Confirming Core Concepts (IaC, GitOps) & Tools (Git, YAML, VSCode) |
+| 3           | **Ansible Building Blocks** | Authoring Automation with Playbooks & Collections |
+| 4           | **Containerization Essentials** | Utilizing Containers with Podman & Image Registry |
+| 5           | **AAP Architecture** | Navigating Execution Environments, Advanced Workflows & Repositories |
+| 6           | **Practical Application** | Identifying Business Use Cases to Drive Value |
+| 7           | **Scale Automation** | Building a Community of Excellence with Best Practices |
+
 
 ---
 
