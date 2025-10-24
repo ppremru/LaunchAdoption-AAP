@@ -1,9 +1,15 @@
 # Why a CoP Based on Enablement?
 
+**Please download and review these ebook.**
+
 Two e-books that outline the benefits of a CoP for automation maturity (adoption):  
 
-* [Advance your automation maturity](https://www.redhat.com/en/resources/automation-maturity-guide-ebook)  
-* [Speed Automation Adoption with a Community of Practice](https://www.redhat.com/en/resources/automation-community-of-practice-ebook)
+1. [Advance your automation maturity](https://www.redhat.com/en/resources/automation-maturity-guide-ebook)  
+2. [Speed Automation Adoption with a Community of Practice](https://www.redhat.com/en/resources/automation-community-of-practice-ebook)
+
+This image aligns with the "Advance your automation maturity" where a CoP is part of the progression.  The assumption is this CoP is starting at Stage 1.
+
+![AAP Maturity Model](./aap-maturity.png)
 
 ## What is a CoP?
 
@@ -19,6 +25,7 @@ Members engage in joint activities and discussions, help each other, and share i
 
 3. **Practice**
 Members are practitioners who develop a shared repertoire of resources, experiences, stories, tools, and ways of addressing recurring problems – in short, a shared practice. This takes time and sustained interaction.
+
 
 ## More about a CoP
 
