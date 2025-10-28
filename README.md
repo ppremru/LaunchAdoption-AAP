@@ -38,16 +38,16 @@ The **Product Adoption Sessions** provide the team with a roadmap to increase AA
 
 #### AAP Adoption Roadmap
 
-Refer to our [Practice Framework](./about/aboutPractice.md) for details.  Here is a summary of recommended milestones to drive sessions:
+Refer to our [Practice Framework](./about/aboutPractice.md) for details.  Here is a summary of recommended MILESTONES to drive sessions:
 
-| Milestone # | Title                                           | Focus Area                                  |
+| MILESTONE # | Title                                           | Focus Area                                  |
 | :---------- | :---------------------------------------------- | :------------------------------------------ |
 | 1           | **CoP Kickoff** | Collaborating & Agreeing on Goals, Cadence, & Member Commitment |
-| 2           | **Fundamental Concepts** | Confirming Core Concepts (IaC, GitOps) & Tools (Git, YAML, VSCode) |
-| 3           | **Ansible Building Blocks** | Authoring Automation with Playbooks & Collections |
-| 4           | **Containerization Essentials** | Utilizing Containers with Podman & Image Registry |
-| 5           | **AAP Architecture** | Navigating Execution Environments, Advanced Workflows & Repositories |
-| 6           | **Practical Application** | Identifying Business Use Cases to Drive Value |
+| 2           | **Practical Application** | Identifying Business Use Cases to Drive Value |
+| 3           | **Fundamental Concepts** | Confirming Core Concepts (IaC, GitOps) & Tools (Git, YAML, VSCode) |
+| 4           | **Ansible Building Blocks** | Authoring Automation with Playbooks & Collections |
+| 5           | **Containerization Essentials** | Utilizing Containers with Podman & Image Registry |
+| 6           | **AAP Architecture** | Navigating Execution Environments, Advanced Workflows & Repositories |
 | 7           | **Scale Automation** | Building a Community of Excellence with Best Practices |
 
 
