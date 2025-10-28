@@ -22,7 +22,7 @@ The sessions are expected to be a lunch and learn approach - less than an hour a
 * Introduction: Set the stage (5 min)
 * Technical Presentation: Core topic deep-dive (20 min)
 * Group Discussion: Apply topic to the team's mission (15 min)
-* Retro/Next Steps: Key takeaways and topic planning for the subsequent session (5 min) |
+* Retro/Next Steps: Key takeaways and topic planning for the subsequent session (5 min) 
 
 ### AAP Adoption Enablement Roadmap
 
