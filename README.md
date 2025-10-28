@@ -36,8 +36,6 @@ The **Onboarding Topics** are grouped into sections in order to support a crawl,
 
 The **Product Adoption Sessions** provide the team with a roadmap to increase AAP Enablement.  It is expected that the sessions are facilitated by a Red Hat Adoption Specialist Architect.   The community (team) should agree upon a set of collaborative sessions to align the community and domain -- and keep a log of events.  
 
-#### AAP Adoption Roadmap
-
 Refer to our [Practice Framework](./about/aboutPractice.md) for details.  Here is a summary of recommended MILESTONES to drive sessions:
 
 | MILESTONE # | Title                                           | Focus Area                                  |
