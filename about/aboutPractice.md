@@ -4,7 +4,7 @@ Our framework consists of leaning into product adoption by curating onboarding t
 
 ## Product Adoption Sessions
 
-The expectation is that the CoP has a set of collaborative sessions initially facilitated by a Red Hat Architect that specializes in adoption.  The goal of the sessions are to tune the domain and help the community curate the list of onboarding topics. 
+The expectation is that the CoP (team) agrees to a set of collaborative sessions initially facilitated by a Red Hat Specialized Adoption Architect.  The goal of the sessions are *enablement* - they provide a bridge between hands-on training and product demos.  Guest speakers (SMEs) or team members might present topics for collaboration.   (This is *not* a replacement for independent nor RHLS *training*.)
 
 ### AAP Adoption Session Format
 
@@ -20,13 +20,13 @@ The sessions are expected to be a lunch and learn approach - less than an hour a
 **Agenda**:
 
 * Introduction: Set the stage (5 min)
-* Technical Presentation: Core topic deep-dive (20 min)
+* Technical Presentation: Core topic presentation (20 min)
 * Group Discussion: Apply topic to the team's mission (15 min)
-* Retro/Next Steps: Key takeaways and topic planning for the subsequent session (5 min) 
+* Retro/Next Steps: Key takeaways and topic planning for the subsequent session (5 min)
 
 ### AAP Adoption Enablement Roadmap
 
-Depending on the team skill set, the sessions may cover more or less than one milestone:
+Depending on the team skill set, a sessions may one or many than milestones:
 
 | Milestone # | Title                                           | Focus Area                                  |
 | :---------- | :---------------------------------------------- | :------------------------------------------ |
