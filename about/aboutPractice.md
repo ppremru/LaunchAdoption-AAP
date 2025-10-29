@@ -26,11 +26,11 @@ The sessions are expected to be a lunch and learn approach - less than an hour a
 
 ### AAP Adoption Enablement Roadmap
 
-Depending on the team skill set, a sessions may one or many than milestones:
+Depending on the team skill set, a session may focus on one milestone or span more than one milestone.  
 
 | Milestone # | Title                                           | Focus Area                                  |
 | :---------- | :---------------------------------------------- | :------------------------------------------ |
-| 1           | **CoP Kickoff** | Collaborating & Agreeing on Goals, Cadence, & Member Commitment |
+| 1           | **CoP Kickoff** | Agreeing on Goals, Cadence, & Member Commitment |
 | 2           | **Practical Application** | Identifying Business Use Cases to Drive Value |
 | 3           | **Fundamental Concepts** | Confirming Core Concepts (IaC, GitOps) & Tools (Git, YAML, VSCode) |
 | 4           | **Ansible Building Blocks** | Authoring Automation with Playbooks & Collections |
