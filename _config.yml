@@ -1,6 +1,6 @@
-remote_theme: pages-themes/architect@v0.2.0
+remote_theme: pages-themes/slate@v0.2.0
 plugins:
 - jekyll-remote-theme
 - jemoji
-title: [Launch Adoption]
+title: [Launch Adoption AAP]
 description: [Enablement CoP for the AAP Team]
