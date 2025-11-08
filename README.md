@@ -48,6 +48,9 @@ Refer to our [Practice Framework](./about/aboutPractice.md) for details.  Here i
 | 6           | **AAP Architecture** | Navigating Execution Environments, Advanced Workflows & Repositories |
 | 7           | **Scale Automation** | Building a Community of Excellence with Best Practices |
 
+## Shared Documents
+
+* [Use Case with RBAC](./usecase/raci.md)
 
 ---
 
