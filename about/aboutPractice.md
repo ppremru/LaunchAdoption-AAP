@@ -68,8 +68,7 @@ Completing structured courses, reading, experimentation and collaboration are es
 
 1. **Red Hat Learning Subscriptions (RHLS)**  
 RHLS courses offer structured, comprehensive Red Hat training with features like hands-on labs, instructor-led videos, and expert support, which are not typically found in no-cost materials.  
-2. **Independent Learning**  
-No cost materials offer foundational using a variety of media from blogs to videos to hands-on labs.
+2. **Independent Learning** No cost materials offer foundational **knowledge** using a variety of media from blogs to videos to hands-on labs.
 3. **Hands-on Exploration**  
 A sandbox dedicated to development provides team members the freedom to innovate and experiment without consequences.
 4. **Collaboration**  
