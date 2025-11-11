@@ -1,6 +1,6 @@
 # Why a CoP Based on Enablement?
 
-**Please download and review these ebook.**
+**Please download and review these ebooks.**
 
 Two e-books that outline the benefits of a CoP for automation maturity (adoption):  
 
