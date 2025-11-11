@@ -50,6 +50,10 @@ Build your toolset - learn some yaml, vscode, and git.  Then integrate the tools
 * [GitLens — Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 * [Intro to Git in VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git)
 
+---
+
+## Sanity Check
+
 ### Key Git Commands to Know
 
 While the guides provide full details, focus on understanding this core set of commands first. This is the basic workflow you will use every day.
@@ -78,7 +82,7 @@ Your goal is to:
 3. Create a new file named `inventory.yml`.
 4. Write a simple **YAML** structure in this file. Use the Red Hat YAML extension to check for errors in real-time.
     > **Example `inventory.yml`:**
->
+    >
     > ```yaml
     > ---
     > all:
@@ -92,7 +96,7 @@ Your goal is to:
     >   vars:
     >     region: "east"
     > ```
->
+    >
 5. Use the **Git** integration in VSCode (or the command line) to:
     * Initialize a new Git repository (`git init`).
     * Add the `inventory.yml` file to staging.
