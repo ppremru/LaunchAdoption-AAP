@@ -1,28 +1,15 @@
 # Core Red Hat Sites and Programs
 
-A few key points from [The value of Red Hat](https://www.redhat.com/en/about/value-of-Red-Hat):
+Here are the key Red Hat sites and programs that provide resources, support, and learning opportunities for your team.
 
-1. The **Red Hat Customer Portal** is a resource for managing your Red Hat products, getting support, and expanding your knowledge.
-    * [Red Hat Customer Portal - login or register](htts://access.redhat.com)
-      * [Get Started with Red Hat - learning paths for access](https://access.redhat.com/start)
-      * [Software & Download Center](https://access.redhat.com/downloads)
-      * [Red Hat Products and Documentation](https://access.redhat.com/products/?product-tab=glossary)
-      * [Support Cases](https://access.redhat.com/support)
-      * [Red Hat Knowledgebase - resources for resolving problems and troubleshooting](https://access.redhat.com/kb)
-2. Learn about Red Hat's approach to security and compliance.
-    * [Red Hat Product Security](https://www.redhat.com/en/solutions/security-approach)
-      * [Red Hat Product Security - Red Hat compliance and certification](https://www.redhat.com/en/solutions/compliance-approach)
-3. Red Hat blogs are an excellent resource for new users because they directly contribute to expanding your knowledge - search by products or channels.
-    * [Offical Red Hat Blogs](https://www.redhat.com/en/blog)
-4. The Red Hat Developer site provides practicle examples which directly contribute to expanding your product knowledge.
-    * [Red Hat Developers]([https://developers.redhat.com)
-      * [Red Hat Developer e-books](https://developers.redhat.com/e-books) :star:
-      * [Red Hat Developer cheat sheets](https://developers.redhat.com/cheat-sheets) :star:
-      * [Learn](https://developers.redhat.com/learn) :star:
-5. The Learning Community site provides content for all levels of learning.
-    * [Welcome to the Red Hat Learning Community](https://learn.redhat.com/)
-6. Red Hat Architecture Center
-    * [Reference Solutions](https://www.redhat.com/architect/portfolio) :star:
+| Resource | Key Links & Notes |
+| :--- | :--- |
+| **Red Hat Customer Portal** | A resource for managing your Red Hat products, getting support, and expanding your knowledge. <ul><li>[Login or Register](https://access.redhat.com)</li><li>[Get Started Paths](https://access.redhat.com/start)</li><li>[Software & Downloads](https://access.redhat.com/downloads)</li><li>[Product Documentation](https://access.redhat.com/products/?product-tab=glossary)</li><li>[Support Cases](https://access.redhat.com/support)</li><li>[Knowledgebase](https://access.redhat.com/kb)</li></ul> |
+| **Red Hat Product Security** | Learn about Red Hat's approach to security and compliance. <ul><li>[Security Approach](https://www.redhat.com/en/solutions/security-approach)</li><li>[Compliance & Certification](https://www.redhat.com/en/solutions/compliance-approach)</li></ul> |
+| **Red Hat Blogs** | An excellent resource for new users to expand knowledge by searching products or channels. <ul><li>[Official Red Hat Blogs](https://www.redhat.com/en/blog)</li></ul> |
+| **Red Hat Developers** | Provides practical examples which directly contribute to expanding your product knowledge. <ul><li>[Developers Home](https://developers.redhat.com)</li><li>[Developer E-books](https://developers.redhat.com/e-books) :star:</li><li>[Developer Cheat Sheets](https://developers.redhat.com/cheat-sheets) :star:</li><li>[Learn](https://developers.redhat.com/learn) :star:</li></ul> |
+| **Red Hat Learning Community** | Provides content for all levels of learning. <ul><li>[Welcome to the RHLC](https://learn.redhat.com/)</li></ul> |
+| **Red Hat Architecture Center** | Provides reference solutions. <ul><li>[Reference Solutions](https://www.redhat.com/architect/portfolio) :star:</li></ul> |
 
 ---
 > :star: Enablement Focus
