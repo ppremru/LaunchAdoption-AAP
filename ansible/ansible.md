@@ -61,63 +61,6 @@ Do you have a crawl-walk level of these skills:
 
 ## Sanity Check
 
-### Your First "Hello World" (Ad-Hoc Command)
+The sanity check builds directly on your foundation skill and introduces concepts that will be developed further in AAP.
 
-Before you write a full playbook, your first step is to use the `ansible` command-line tool to run a single task. This is called an **ad-hoc command**.
-
-This exercise builds directly on your `foundation.md` and `rhel.md` skills. You will use the `inventory.yml` file you already built to run a basic `ping` module against a host.
-
-1. **Install Ansible:** On your RHEL machine, install `ansible-core`:
-
-    ```bash
-    sudo dnf install ansible-core
-    ```
-
-2. **Define Inventory:** Use the `inventory.yml` file you created in the `foundation.md` exercise.
-
-    ```yaml
-    ---
-    all:
-      hosts:
-        webserver-01:
-          ansible_host: 192.168.1.10
-    ```
-
-3. **Run the Command:** From your terminal, run the following command:
-
-    ```bash
-    # ansible [inventory] -m [module] [host_pattern]
-    ansible -i inventory.yml -m ping all
-    ```
-
-4. **Expected Output:** If successful, the `ping` module will return a "pong," confirming you have a working inventory and a valid connection.
-
-    ```json
-    webserver-01 | SUCCESS => {
-        "ansible_facts": {
-            "discovered_interpreter_python": "/usr/bin/python3"
-        },
-        "changed": false,
-        "ping": "pong"
-    }
-    ```
-
-> This simple success is the foundation for all other Ansible skills.
-
-### Key Troubleshooting Skills
-
-> **Note on `ansible-core`:**
-> `ansible-core` is the name of the software package you install. The *commands* it provides for running automation are `ansible` (for ad-hoc commands) and `ansible-playbook` (for running playbooks). The table below lists the correct commands and flags for troubleshooting.
-
-When a playbook fails, your first instinct should be to use the verbosity flags. This is the most important troubleshooting skill you can learn.
-
-| Command | What it does |
-| :--- | :--- |
-| `ansible-playbook my_playbook.yml -v` | **Verbose.** Shows you the basic output for each task. |
-| `ansible-playbook my_playbook.yml -vv` | **Very Verbose.** Good for seeing module inputs. |
-| `ansible-playbook my_playbook.yml -vvv` | **Extra Verbose.** Shows all details, including connection information. |
-| `ansible-playbook my_playbook.yml --check` | **Check Mode.** Runs the playbook without making any changes. |
-| `ansible-playbook my_playbook.yml --syntax-check` | **Syntax Check.** Verifies your playbook's YAML syntax is valid. |
-| `ansible-lint my_playbook.yml` | **Linter.** Checks your playbook for best practices and potential errors. |
-
----
+[Sanity Check](ansible-101-enabled.md)
