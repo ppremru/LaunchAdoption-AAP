@@ -48,7 +48,7 @@ Build your toolset - learn some yaml, vscode, and git.  Then integrate the tools
 * [YAML Language Support by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
   * **Note:** This extension provides the **YAML linting** (real-time error checking) mentioned in our goals.
 * [GitLens — Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
-* [Intro to Git in VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git)
+* [Using Git source control in VS Code](https://code.visualstudio.com/docs/sourcecontrol/overview)
 
 ---
 
