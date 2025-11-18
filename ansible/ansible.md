@@ -32,8 +32,10 @@ Do you have a crawl-walk level of these skills:
 
 ### Labs
 
-* [Getting started with Red Hat Ansible Automation Platform](https://cloud.redhat.com/learn/getting-started-red-hat-ansible-automation-platform) 🥇
 * [Ansible Basics: Automation Technical Overview](https://www.redhat.com/en/services/training/do007-ansible-essentials-simplicity-automation-technical-overview) (no charge)
+* [Foundations of Ansible](https://developers.redhat.com/learn/ansible/foundations-ansible?extIdCarryOver=true&intcmp=7015Y000003t89bQAA&percmp=7013a0000034e7YAAQ&sc_cid=RHCTN1250000438486&source=sso)
+* [Get started with Ansible Playbooks](https://developers.redhat.com/learn/ansible/get-started-ansible-playbooks?extIdCarryOver=true&intcmp=7015Y000003t89bQAA&percmp=7013a0000034e7YAAQ&sc_cid=RHCTN1250000438486)
+* [Getting started with Red Hat Ansible Automation Platform](https://cloud.redhat.com/learn/getting-started-red-hat-ansible-automation-platform) 🥇
 * [Red Hat Ansible Automation Platform learning hub](https://www.redhat.com/en/technologies/management/ansible/learn) 🥇
 
 ### Reading Material and References
