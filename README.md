@@ -80,7 +80,8 @@ Refer to our [Practice Framework](./about/aboutPractice.md) for a table of recom
 
 ## Use Cases
 
-* [Use Case with RBAC](./usecase/raci.md)
+* [Use Case with RBAC with an MVP view](./usecase/rbac-mvp.md)
+* [Use Case with RBAC deep dive into RACI](./usecase/rbac-raci.md)
 
 ---
 > :link: *[This repo in web format](https://ppremru.github.io/LaunchAdoption-AAP/)*  
