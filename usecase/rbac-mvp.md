@@ -52,34 +52,39 @@ Given:
 
 We will use the **RHEL System Administration Project Team** as the example.
 
-### Phase 1: Platform Admin (Structure & Access)
+### Phase 1: Platform Administration - Create Organization, Teams, and Credentials
 
-* **Create Organization:** Create `RHEL-Operations`.
-* **Create Teams:** Create the three functional teams:
-    * `RHEL-Admins` (Assign role: Organization Admin)
-    * `RHEL-Specialists` (The Builders & Operators)
-    * `RHEL-HelpDesk` (Optional: Future consumers)
-* **Add Credential:** Add the privileged machine credential (SSH Key) to the Organization so Specialists can use it.
+The **Platform Administrator** establishes the foundational structure, security boundaries, and user groups for the organization.
 
-### Phase 2: Automation Specialist (Content & Logic)
+* **Step 1:** Create Organization: Navigate to **Access** $\to$ **Organizations** and create the top-level domain: `RHEL-Operations`.
+* **Step 2:** Create Teams: Navigate to **Access** $\to$ **Teams** and create the three functional user groups:
+  * `RHEL-Admins` (Grant role: **Organization Admin** on the new Org)
+  * `RHEL-Specialists` (The Builders & Operators)
+  * `RHEL-HelpDesk` (Optional: Future consumers)
+* **Step 3:** Add Credential: Navigate to **Resources** $\to$ **Credentials** and create the privileged machine credential (SSH Key) within the Organization scope.
 
-* **Create Project:** Connect AAP to the Git repository containing the playbooks.
-* **Create Inventory:** Define the `RHEL-Prod-Hosts` list.
-* **Create Job Template:** Create the job `Restart-Httpd-Service`.
-* **Attach Resources:** **Crucial:** Attach the *Inventory* and *Credential* to the Template now so the Help Desk user is not prompted later.
+### Phase 2: Automation Specialist - Resource Creation & Association
 
-### Phase 3: Assigning Access
+These actions are performed by the **Automation Specialist**, who is a member of the **`RHEL-Specialists`** team.
 
-The Platform Admin or Team Lead delegates access to the specific resources created by the Automation Specialist.
+* **Step 1:** Create Project: Navigate to **Resources** $\to$ **Projects** and create the Project, linking it to the Git repository containing the playbooks.
+* **Step 2:** Create Inventory: Navigate to **Resources** $\to$ **Inventories** and define the host list: `RHEL-Prod-Hosts`.
+* **Step 3:** Create Job Template: Navigate to **Resources** $\to$ **Job Templates** and create the job `Restart-Httpd-Service`.
+* **Step 4:** Associate Resources: On the `Restart-Httpd-Service` Job Template, **associate** the **Inventory** and **Credential** *(Crucial: This ensures the Help Desk user is not prompted for credentials and cannot see them).*
 
-* **Assign Specialist Access (Build & Run):**
-    * Grant `RHEL-Specialists` -> **Project Admin** role on the Project (allows sync/update).
-    * Grant `RHEL-Specialists` -> **Inventory Admin** role on `RHEL-Prod-Hosts` inventory.
-    * Grant `RHEL-Specialists` -> **Job Template Admin** role on Job Templates (allows Edit **and** Execute).
-* **Assign Help Desk Access (Future Scale):**
-    * Navigate to Template `Restart-Httpd-Service` -> Access.
-    * Add Team `RHEL-HelpDesk`.
-    * Role: **Execute** (Run only).
+### Phase 3: Assigning Access - The Separation of Duty
+
+The Platform Admin enforces the separation of roles by assigning permissions to the specific resources created in Phase 2.
+
+* **Step 1: Assign Specialist Access (Build & Run):**
+  * Navigate to the **Project** $\to$ Access $\to$ Add Team $\to$ Grant `RHEL-Specialists` the **Project Admin** role (allows sync/update).
+  * Navigate to the **Inventory** $\to$ Access $\to$ Add Team $\to$ Grant `RHEL-Specialists` the **Inventory Admin** role (full host list management).
+  * Navigate to the **Job Template** $\to$ Access $\to$ Add Team $\to$ Grant `RHEL-Specialists` the **Job Template Admin** role (allows Edit **and** Execute).
+* **Step 2: Assign Help Desk Access (Execute Only):**
+  * Navigate to Template `Restart-Httpd-Service` $\to$ Access.
+  * Add Team `RHEL-HelpDesk` $\to$ Role: **Execute** (Run only).
+  * Grant `RHEL-HelpDesk` the **Use** role on the Inventory `RHEL-Prod-Hosts` (allows using hosts in the job).
+  * Grant `RHEL-HelpDesk` the **Use** role on the Machine Credential (allows the job to use the key).
 
 ## The Result
 
