@@ -1,5 +1,12 @@
 # My AAP: MVP Configuration Plan
 
+Use case:
+* Experimenting with AAP and RBAC for a "small team".  
+* Small set of users that will maintain the AAP platform.
+* Another set of users that will write, test, and run the playbooks.
+* The users have domain knowledge/deeds such as windows, rhel, network, security, storage ... 
+* In the future, there might be a team of people that only run code (help-desk).
+
 ## Table of Contents
 
 1.  [Users](#1-users)
