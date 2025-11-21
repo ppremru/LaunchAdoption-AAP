@@ -163,3 +163,10 @@ Action: The Domain Specific Teams create and maintain their own resources using 
 
 > NOTE: This document represents the full MVP stack for ONE vertical (RHEL).
 > To complete the platform setup, repeat the "Day 3 Checklist" steps for the other Domain Teams (Windows, Network, etc.) using their respective credentials and playbooks.
+
+----
+
+[RBAC Triangle in AAP](./rbac-triangle.png)
+
+----
+
