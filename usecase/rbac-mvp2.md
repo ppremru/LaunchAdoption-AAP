@@ -1,39 +1,39 @@
-# My AAP: MVP Configuration Plan
+# MVP Use Case
 
+## Requirements
 
-*** WIP ***
-WORK IN PROGRESS!!!!
+Establish an initial RBAC model (MVP) for a small team before scaling to the enterprise.
 
-Use case:
-* Experimenting with AAP and RBAC for a "small team".  
-* Small set of users that will maintain the AAP platform.
-* Another set of users that will write, test, and run the playbooks.
-* The users have domain knowledge/deeds such as windows, rhel, network, security, storage ... 
-* In the future, there might be a team of people that only run code (help-desk).
+* **Business Units**:  IT Services for two departments (Transportation and Education)
+* **Platform Administrators:** A small team managing the AAP platform
+* **Automation Specialists:** A set of users, grouped by domain expertise, who will write, test, and run playbooks
+* **Domain Teams:** Groups of that users have specific domain expertise (Windows, RHEL, Network, Security, or Storage).
+* **Help Desk:** Prepare for a future team that will only execute pre-approved automation
 
 ## Table of Contents
 
-1.  [Users](#1-users)
-2.  [Organizations](#2-organizations)
-3.  [Organization Administrator Teams](#3-organization-administor-teams)
-4.  [Domain Specific Teams](#4-domain-specific-teams)
-5.  [Domain Team Permissions](#5-domain-team-permissions)
-6.  [Execution Environments](#6-execution-environments)
-7.  [Credentials Setup](#7-credentials-setup)
-8.  [Domain Specific Resources](#8-domain-specific-resources)
-9.  [Checklists](#9-checklists)
+1. [Users](#1-users)
+2. [Organizations](#2-organizations)
+3. [Organization Administrator Teams](#3-organization-administration-teams)
+4. [Domain Specific Teams](#4-domain-specific-teams)
+5. [Domain Team Permissions](#5-domain-team-permissions)
+6. [Execution Environments](#6-execution-environments)
+7. [Credentials Setup](#7-credentials-setup)
+8. [Domain Specific Resources](#8-domain-specific-resources)
 
 -----
 
 ## 1 Users
 
-Action: One of the Platform Administrators creates the local emergency accounts and configures the connection to the corporate Identity Provider (IdP).
+This section establishes the user management model, we will:
 
-### Platform Administrator Users
+* **Leverage the Default Admin:** To get started, we will log in with the `admin` user, which was defined in the installation process.  
+* **Create Platform Administrators:** We will create three local users dedicated to system administrators, which provides us a path forward to no longer use the default `admin`.
+* **Configure External Authentication:** We will introduce the concept that an external Identity Provider (IdP) connection will manage authentication for normal users and teams.
 
-Use the default `admin` account to create and verify the platform-admin 1/2/3 accounts.
+### Create Platform Administrator Users
 
-> Create local user-type System Administrator accounts for emergency access or "break glass" scenarios. Generally, user accounts are provided through an external authentication for centralized management and auditing; however, local system administrator accounts serve as a critical backup function.
+**Action:** As the `admin`, create three new system administrators.
 
 | Name | User Type | Organization |
 | :--- | :--- | :--- |
@@ -41,77 +41,117 @@ Use the default `admin` account to create and verify the platform-admin 1/2/3 ac
 | `platform-admin-2` | System Administrator | Default |
 | `platform-admin-3` | System Administrator | Default |
 
-> In this case, the Organization field does not limit the user's authority. The System Administrator role grants platform-wide structural control, regardless of the Organization setting.
+> *Note: While the UI requires an Organization selection (e.g., Default), the System Administrator User Type grants full platform-wide authority that supersedes this setting.*
 
-### External Authentication Users
+### Configure External Authentication
 
-One of the platform administrators should configure the connection to the corporate Identity Provider (IdP) for standard users (EG: SAML/LDAP user mapping). The user role typically mapped to standard users is Member.
+**Action:** As a platform administrator, initiate configuration to the corporate Identity Provider (IdP) for normal users.
 
-> Setting up external authentication is out of scope for this document.
+| Mapping | Setting | Description |
+| :--- | :--- | :--- |
+| User Type | Normal User | Platform-wide type to allow a user to log into AAP|
+| Organization | Default | Default is the only Organization Defined|
+
+> *Note: Configuring external authentication is out of scope for this document.  Keep in mind that we are at the initial steps of configuration, there will be more updates to the SAML/LDAP mapping as the MVP configuration evolves.  Refer to [APPENDIX - More on Configure External Authentication](#more-on-configure-external-authentication).*
+
+-----
 
 ## 2 Organizations
 
-Action: One of the Platform Administrators creates the organization to house all teams and resources.
+This section establishes the organizational model for our two IT service teams, transportation and education.  Within AAP, **Organizations** align with business units - providing logical boundaries for teams and automation assets.   See [APPENDIX - More on  Organizations](#more-on-organizations) below for further detail.
+
+### Create Organizations
+
+**Action:** As a platform administrator, create two organizations.
 
 | Organization Name | Description (Purpose/Scope) |
 | :--- | :--- |
-| `primary-services` | Primary IT Automation Services |
-| `secondary-services` | Specialized Resources |
+| `IT-services-transportation` | IT Automation Services for the transportation Division |
+| `IT-services-education` | Specialized Resources for the education Division|
 
-## 3 Organization Administrator Teams
+> *Note:  For the purpose of demonstration we created two organizations, however, for much of this MVP, we are focusing only on `IT-services-transportation`.*
 
-Action: One of the Platform Administrators creates these teams inside the Organizations and delegates control to them, removing the dependency on Platform Admins.
+-----
 
-| Organization | Team Name | Description |
-| :--- | :--- | :--- |
-| `primary-services` | `primary-admins` | Manages the primary-services organization. |
-| `secondary-services` | `seconary-admins` | Manages the secondary-services organization. |
+## 3 Organization Administration Teams
 
-> Note: One of the platform administrators should map (delegate) an external SAML/LDAP group to this group so that administrators are managed centrally.
+This section defines an administration team delegated to manage the organization.  What does this mean?  Members of this team will be granted Organization Administration privileges, but will not have full System Administrative privileges - they will be able to add other teams and resources specific to their organization.
+
+The delegation ensures the Platform Administrators can focus on platform health while the Organization Administrators manage automation artifacts for their specific business unit.
+
+### Create Admin Teams
+
+**Action:** As a platform administrator, create a dedicated admin team for each Organization and grant authority. This is a multi-step process: first create the Team, then via the Organization Access Tab, grant Organization Administration role to the team.
+Users will be added via the external authentication.
+
+| Organization | Team Name | Description |  Access Tab - Role |
+| :--- | :--- | :--- | :--- |
+| `IT-services-transportation` | `admins-transportation` | Manages the IT-services-transportation organization | Organization Admin |
+| `IT-services-education` | `admins-education` | Manages the IT-services-education organization | Organization Admin |
+
+> *Note: It is best practice to map an external SAML/LDAP group (e.g., CN=APP_AAP_transportation_Admins) to this team so that administrative access is managed centrally by your Identity Provider.*
 
 ## 4 Domain Specific Teams
 
-Action: The Organization Administrator (`primary-admins`) creates these teams to separate duties by technical domain.
+This section creates Domain Specific Teams which will be used to group users based on their technical domain. This enforces separation of duties, ensuring that specialists will manage only the resources relevant to their expertise (e.g., RHEL vs. Windows).
+
+### Create the Domain Teams
+
+**Action:** As a member of the `admins-transportation` team, create the domain-specific teams to establish functional silos. You are only establishing the team; you will grant permissions to these teams in the [Domain Team Permissions Section](#5-domain-team-permissions) and add users via external authentication.
 
 | Organization | Team Name | Description |
 | :--- | :--- | :--- |
-| `primary-services` | `RHEL-Specialists` | Manages RHEL/Linux systems. |
-| `primary-services` | `Windows-Specialists` | Manages Windows systems. |
-| `primary-services` | `Networking-Specialists` | Manages network devices. |
-| `primary-services` | `VMware-Specialists` | Manages VMware virtualization assets. |
-| `primary-services` | `Security-Specialists` | Manages security compliance content. |
+| `IT-services-transportation` | `RHEL-Specialists` | Manages RHEL/Linux systems|
+| `IT-services-transportation` | `Windows-Specialists` | Manages Windows systems|
+| `IT-services-transportation` | `Networking-Specialists` | Manages network devices|
+| `IT-services-transportation` | `VMware-Specialists` | Manages VMware virtualization assets|
+| `IT-services-transportation` | `Security-Specialists` | Manages security compliance content|
 
-> Note: Map external SAML/LDAP groups to these teams to automate user provisioning.
+> *Note: Map external SAML/LDAP groups (e.g., AD-Windows-Admins) to these teams to automate user provisioning.*
 
 ## 5 Domain Team Permissions
 
-Action: The Organization Administrator (`primary-admins`) assigns the following roles to each Domain Team at the Organization Level.
+This section defines how to **delegate creation rights** for the domain teams. By default, only Organization Admins can create resources. You must explicitly grant the Domain Teams permission to create their own resources (Projects, Inventories, Job Templates).
 
-| Role Name | Scope | What it allows the Team to do |
-| :--- | :--- | :--- |
-| Inventory Admin | Organization | Create and edit Inventories. |
-| Project Admin | Organization | Create and sync Projects (git). |
-| Credential Admin | Organization | Create Credentials. |
-| Job Template Admin | Organization | Create and modify Job Templates. |
+### Delegate Resource Creation Rights
 
-> MVP Warning: Granting these roles at the Organization level allows teams to create resources, but also allows them to see resources created by other teams within the same Organization. Strict naming conventions are required to prevent confusion.
+**Action:** As a member of the `admins-transportation` team, via the Organization Access Tab, for each Domain Team (e.g., RHEL-Specialists), assign the specific creation roles.  
+
+| Role | Description |
+| :--- | :--- |
+| **Inventory Admin** | Has all permissions to all inventories in the organization. |
+| **Project Admin** | Has all permissions to all projects in the organization. |
+| **Credential Admin** | Has all permissions to all credentials in the organization. |
+| **Job Template Admin** | Has all permissions to all job templates in the organization. |
+
+> *Critical MVP Note:  Granting these roles at the Organization level allows teams to create new resources, but it also grants administrative access to all resources of that type within the Organization.*
+>
+> * *Risk: A `RHEL-Specialist` could technically edit a `Windows-Specialist` inventory.*
+> * *Mitigation: Use strict Naming Conventions (e.g., always prefixing with `RHEL-` or `Win-`) to prevent accidental crossover.*
+>
 
 ## 6 Execution Environments
 
-Action: One of the Platform Administrators ensures images are available globally. The Organization Administrator assigns them to the `primary-services` Organization.
+Automation runs inside **Execution Environments (EEs)**, which are container images that hold the necessary tools (like Ansible, Python, and System Roles). Teams cannot run automation unless the correct EE is assigned to their Organization.
 
-| EE Name | Description | Used By |
-| :--- | :--- | :--- |
-| `AAP-Default-EE` | Standard Ansible 2.9+ and base collections. | General Purpose |
-| `EE-Supported-RHEL` | Optimized for RHEL (system roles). | `RHEL-Specialists` |
-| `EE-Supported-Windows` | Contains pywinrm and Windows collections. | `Windows-Specialists` |
-| `EE-Supported-Network` | Contains network collections (Cisco, Juniper, etc.). | `Networking-Specialists` |
+**Action:** Log in as a Platform Administrator to create these Execution Environments globally. Then, navigate to the `IT-services-transportation` Organization's **Execution Environments** tab to add them.
+
+| Name | Description |
+| :--- | :--- |
+| `AAP-Default-EE` | Standard Ansible 2.9+ and base collections. |
+| `EE-Supported-RHEL` | Optimized for RHEL (system roles). Intended for RHEL-Specialists. |
+| `EE-Supported-Windows` | Contains pywinrm and Windows collections. Intended for Windows-Specialists. |
+| `EE-Supported-Network` | Contains network collections. Intended for Networking-Specialists. |
 
 ## 7 Credentials Setup
 
-Action: The Domain Specific Teams create these inside the `primary-services` Organization using their specific secrets.
+Credentials are encrypted secrets (SSH keys, tokens, passwords) required to access external systems. This section delegates credential creation to the Domain Teams, ensuring that sensitive secrets remain with the subject matter experts.
 
-| Credential Name | Credential Type | Owner Team | Secret Data Needed |
+### Create Credentials
+
+**Action:** Log in as a member of the specific Domain Team (e.g., `RHEL-Specialists`). Navigate to **Resources** -> **Credentials** and create these credentials inside the `IT-services-transporation` Organization.
+
+| Name | Credential Type | Team | Secret Data Needed |
 | :--- | :--- | :--- | :--- |
 | `RHEL-Git-Access` | Source Control | `RHEL-Specialists` | SSH Private Key (Git) |
 | `Windows-Git-Access` | Source Control | `Windows-Specialists` | Personal Access Token / SSH Key |
@@ -119,58 +159,106 @@ Action: The Domain Specific Teams create these inside the `primary-services` Org
 | `Windows-WinRM-Key` | Machine | `Windows-Specialists` | AD Service Account (User/Pass) |
 | `Network-Device-Auth`| Machine | `Networking-Specialists` | TACACS/Radius (User/Pass) |
 
-> Security Note: It is best practice for Domain Teams to enter these credentials themselves so that Platform Admins and Org Admins do not have to know the specific secrets (Private Keys/Passwords).
+> *Note: It is best practice for Domain Teams to enter these credentials themselves so that Platform Admins and Org Admins do not have to know the specific secrets.*
 
 ## 8 Domain Specific Resources
 
-Action: The Domain Specific Teams create and maintain their own resources using the credentials and environments defined above.
+This section details the creation of the primary automation assets. Each Domain Team uses their specific permissions to build the isolated resources required for their technical silo.
 
-| Resource Type | Name | Owner / Creator | Purpose |
+### Create Domain Specific Resources
+
+**Action:** Log in as a member of the specific Domain Team. Navigate to the specific Resource type (Inventories, Projects, Templates) to create the following assets.
+
+| Resource Type | Name | Team | Purpose |
 | :--- | :--- | :--- | :--- |
-| Inventories | `RHEL-Prod-Hosts` | `RHEL-Specialists` | Host segregation for Linux. |
-| | `Windows-Prod-Hosts` | `Windows-Specialists` | Host segregation for Windows. |
-| | `Network-Prod-Hosts` | `Networking-Specialists` | Host segregation for Network. |
-| Projects | `RHEL-Patch-Project` | `RHEL-Specialists` | Container for Linux playbooks. |
-| | `Windows-Config-Project` | `Windows-Specialists` | Container for Windows playbooks. |
-| Job Templates | `RHEL-Restart-Service` | `RHEL-Specialists` | Runnable content for siloed tasks. |
-| | `Windows-Disable-User` | `Windows-Specialists` | Runnable content for siloed tasks. |
+| **Inventory** | `RHEL-Prod-Hosts` | `RHEL-Specialists` | Host segregation for Linux |
+| **Inventory** | `Windows-Prod-Hosts` | `Windows-Specialists` | Host segregation for Windows |
+| **Inventory** | `Network-Prod-Hosts` | `Networking-Specialists` | Host segregation for Network |
+| **Project** | `RHEL-Patch-Project` | `RHEL-Specialists` | Container for Linux playbooks |
+| **Project** | `Windows-Config-Project` | `Windows-Specialists` | Container for Windows playbooks |
+| **Job Template** | `RHEL-Restart-Service` | `RHEL-Specialists` | Runnable content for siloed tasks |
+| **Job Template** | `Windows-Disable-User` | `Windows-Specialists` | Runnable content for siloed tasks |
 
 ## 9 Checklists
 
 ### Day 1: Platform Administrator (Any of the 3)
 
-  * Verify Local Admins: Confirm `platform-admin-1`, `2`, and `3` are created.
-  * Connect IDP: Configure SAML/LDAP settings.
-  * Create Organizations: Create `primary-services` and `secondary-services`.
-  * Create Admin Team: Create `primary-admins` team inside `primary-services`.
-  * Assign Permissions: Grant `primary-admins` the Organization Administrator role.
-  * Map IDP Group: Link SAML/LDAP group to `primary-admins`.
-  * Verify EEs: Ensure Red Hat supported Execution Environments are present and assigned to `primary-services`.
+* **Verify Local Admins:** Confirm `platform-admin-1`, `2`, and `3` are created.
+* **Connect IDP:** Configure SAML/LDAP settings.
+* **Create Organizations:** Create `IT-services-transportation` and `IT-services-education`.
+* **Create Admin Team:** Create `admins-transportation` team inside `IT-services-transportation`.
+* **Assign Permissions:** Grant `admins-transportation` the Organization Administrator role.
+* **Map IDP Group:** Link SAML/LDAP group to `admins-transportation`.
+* **Verify EEs:** Ensure Red Hat supported Execution Environments are present and assigned to `IT-services-transportation`.
 
 ### Day 2: Organization Administrator
 
-  * Create Domain Teams: Create `RHEL-Specialists`, `Windows-Specialists`, etc..
-  * Map Groups: Link SAML/LDAP groups to the Domain Teams.
-  * Grant Roles: For each Domain Team, grant Organization-Level roles: Inventory Admin, Project Admin, Credential Admin, Job Template Admin, and Execute.
-  * Verify Access: Confirm a Domain Team member can log in and sees the "Create" button for inventories.
+* **Create Domain Teams:** Create `RHEL-Specialists`, `Windows-Specialists`, etc.
+* **Map Groups:** Link SAML/LDAP groups to the Domain Teams.
+* **Grant Roles:** For each Domain Team, grant Organization-Level roles: Inventory Admin, Project Admin, Credential Admin, Job Template Admin.
+* **Verify Access:** Confirm a Domain Team member can log in and sees the "Create" button for inventories.
 
 ### Day 3: Domain Specialist (RHEL Team)
 
-  * Create Git Credential: Add `RHEL-Git-Access` (Source Control type).
-  * Create Machine Credential: Add `RHEL-SSH-Key` (Machine type).
-  * Create Inventory: Create `RHEL-Prod-Hosts` and add a test IP.
-  * Create Project: Create `RHEL-Patch-Project` and sync with Git.
-  * Create Job Template: Create `RHEL-Restart-Service`, linking the Inventory, Project, and Credentials.
-  * Launch: Run the template and verify success.
+* **Create Git Credential:** Add `RHEL-Git-Access` (Source Control type).
+* **Create Machine Credential:** Add `RHEL-SSH-Key` (Machine type).
+* **Create Inventory:** Create `RHEL-Prod-Hosts` and add a test IP.
+* **Create Project:** Create `RHEL-Patch-Project` and sync with Git.
+* **Create Job Template:** Create `RHEL-Restart-Service`, associating the Inventory, Project, and Credentials.
+* **Launch:** Run the template and verify success.
 
 -----
 
-> NOTE: This document represents the full MVP stack for ONE vertical (RHEL).
-> To complete the platform setup, repeat the "Day 3 Checklist" steps for the other Domain Teams (Windows, Network, etc.) using their respective credentials and playbooks.
+## APPENDIX
 
-----
+### More on Organizations
 
-[RBAC Triangle in AAP](./rbac-triangle.png)
+**The simplest, most important best practice:** Start with a single Organization and use Teams for 99% of your access control.
 
-----
+> **The Metaphor:** Think of an Organization as a building and Teams as the locked doors inside it. It is much easier to manage one building with good locks than it is to manage ten separate buildings.
 
+#### 1. The Default: One Organization, Many Teams (Highly Recommended)
+
+This is the most flexible and scalable model for most enterprises.
+
+**Why it is better:**
+
+* **Resource Sharing:** Everyone lives in the same "building." This means a Job Template for the "App Team" can easily *Use* a Project from the "DevOps Team" and a Credential from the "Security Team." This promotes reusability.
+* **Simplicity:** You manage all your resources (Inventories, Projects, Credentials) in one place.
+* **Clear Delegation:** You use Teams (like `app-operators`, `network-admins`, `auditors`) to control who can do what. This is the correct way to handle separation of duties for groups that are part of the same company.
+
+#### 2. The Exception: When to Create a Second Organization
+
+You should only create a new Organization when you have a strict requirement for **total isolation**. This is for *segregation*, not just *delegation*.
+
+**Ask these questions. If the answer is "yes," you may need a new Organization:**
+
+* **Is there a strict compliance or data silo requirement?**
+  * *Example:* "The Finance-SOX team has resources that are part of a legal audit. The regular IT-Admins must be incapable of even seeing that these resources exist. An accidental permission grant cannot be allowed."
+* **Am I managing completely separate, unrelated business units?**
+  * *Example:* "We are a corporation that owns a Transportation Division and an Education Division. They have zero overlap in users, servers, or playbooks. They are effectively two different companies."
+* **Am I a multi-tenant provider?**
+
+-----
+
+### More on Configure External Authentication
+
+#### 1. Initial Setup (Global Identity)
+
+At the very beginning, before you have created your custom Organizations, the only thing you can definitively define for a user is their **User Type**.
+
+* **User Type:** You define them as a **Normal User**. This is a platform-wide setting that simply means "this person can log in, but they are not a Superuser".
+* **Default Org:** If they log in right now, before you create anything else, they will typically just land in the **Default** organization because it is the only one that exists.
+
+#### 2. Organization Creation (The Destination)
+
+You then move to **Section 2** and manually create your specific Organizations (e.g., `IT-services-transportation`). Now the "destination" exists.
+
+#### 3. Assigning the Role (Membership)
+
+**This is when the "Member" role becomes relevant.**
+
+Once the Organization exists, you (or your SAML mapping) can assign the user the **Member** role for that specific Organization.
+
+* **The Logic:** You cannot be a "Member" of a club that hasn't been built yet.
+* **The Result:** The user logs in, AAP sees they are a **Normal User**, checks the map, sees they belong to `IT-services-transportation`, and grants them the **Member** role for that specific Organization.
