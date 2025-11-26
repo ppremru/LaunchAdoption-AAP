@@ -30,8 +30,8 @@ Build your toolset - learn some yaml, vscode, and git.  Then integrate the tools
 
 ### YAML Essentials
 
-* [YAML basics in 5 minutes](https://www.redhat.com/en/blog/yaml-basics-5-minutes)
-* [YAML Essentials Cheat Sheet](https://developers.redhat.com/cheat-sheets/yaml-essentials)
+* [What is YAML?](https://www.redhat.com/en/topics/automation/what-is-yaml)
+* [YAML for beginners](https://www.redhat.com/en/blog/yaml-beginners)
 
 ### VsCode Essentials
 
