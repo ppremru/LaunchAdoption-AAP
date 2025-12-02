@@ -8,14 +8,14 @@ The learning path below explains *what* each foundational skill is and *why* it 
 
 ```mermaid
 graph LR
-    A[Introduce Concepts] --> B[Master Syntax];
+    A[Introduce Concepts] --> B[Use YAML Syntax];
     B --> C[Configure Your IDE];
     C --> D[Use Version Control];
     D --> E[Practice - Tie it all together];
 ```
 
 * **Introduce Concepts:** Grasp the high-level ideas of IaC (Infrastructure as Code) and DevOps. These are the core "why" philosophies, and AAP is the tool designed to implement them. Understanding this gives your work context.
-* **Master Syntax:** Write YAML syntax and use a linter to verify it. YAML is the language of Ansible; everything you write (playbooks, inventories, etc.) is in YAML. Mastering its syntax is like learning the alphabet before writing a novel.
+* **Use YAML Syntax:** Write YAML syntax and use a linter to verify it. YAML is the language of Ansible; everything you write (playbooks, inventories, etc.) is in YAML. Mastering its syntax is like learning the alphabet before writing a novel.
 * **Configure Your IDE:** Set up VSCode as a professional automation editor. VSCode is your workshop. With the right extensions (like the Red Hat YAML linter), it catches your YAML syntax errors before you commit them to Git, saving you hours of troubleshooting.
 * **Use Version Control:** Experiment with basic git commands and workflows. Git is the "source of truth" for AAP. Your automation code (Ansible Playbooks) must be stored in Git, as AAP pulls code directly from it to run jobs. A basic workflow (clone, branch, commit, push) is a daily requirement.
 
