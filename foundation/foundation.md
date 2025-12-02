@@ -54,6 +54,11 @@ Build your toolset - learn some yaml, vscode, and git.  Then integrate the tools
 
 ## Sanity Check
 
+Some extra notes:
+
+* [Yaml 101](./yaml-101.md)
+* [Git 101](./git-101.md)
+
 ### Key Git Commands to Know
 
 While the guides provide full details, focus on understanding this core set of commands first. This is the basic workflow you will use every day.
