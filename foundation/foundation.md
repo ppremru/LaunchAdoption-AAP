@@ -32,16 +32,17 @@ Build your toolset - learn some yaml, vscode, and git.  Then integrate the tools
 
 * [What is YAML?](https://www.redhat.com/en/topics/automation/what-is-yaml)
 * [YAML for beginners](https://www.redhat.com/en/blog/yaml-beginners)
-
-### VsCode Essentials
-
-* [Visual Studio Code](https://code.visualstudio.com/docs) download, tutorials and setup!
+* [YAML essentials for Ansible (lab)](https://developers.redhat.com/learn/ansible/yaml-essentials-ansible)
 
 ### Git Essentials
 
 * [A Beginner's Guide to Git](https://developers.redhat.com/articles/2023/08/02/beginners-guide-git-version-control#)
 * [Learn **Git** (References to book, videos...)](https://git-scm.com/learn)
 * [Git best practices: Workflows for GitOps deployments](https://developers.redhat.com/articles/2022/07/20/git-workflows-best-practices-gitops-deployments#)
+
+### VsCode Essentials
+
+* [Visual Studio Code](https://code.visualstudio.com/docs) download, tutorials and setup!
 
 ### Bring yaml, vscode and git together with extensions
 
