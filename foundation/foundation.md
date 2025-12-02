@@ -39,6 +39,8 @@ Build your toolset - learn some yaml, vscode, and git.  Then integrate the tools
 * [A Beginner's Guide to Git](https://developers.redhat.com/articles/2023/08/02/beginners-guide-git-version-control#)
 * [Learn **Git** (References to book, videos...)](https://git-scm.com/learn)
 * [Git best practices: Workflows for GitOps deployments](https://developers.redhat.com/articles/2022/07/20/git-workflows-best-practices-gitops-deployments#)
+* [A beginner's guide to Git version control (lab)](https://developers.redhat.com/articles/2023/08/02/beginners-guide-git-version-control#)
+* [Introduction to Git and GitHub (lab)](https://developers.redhat.com/articles/2023/08/02/beginners-guide-git-version-control#)
 
 ### VsCode Essentials
 
