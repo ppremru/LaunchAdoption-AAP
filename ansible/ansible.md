@@ -53,6 +53,7 @@ Do you have a crawl-walk level of these skills:
 ### Ebooks
 
 * [Tales from the field: A system administrator's guide](https://www.redhat.com/rhdc/managed-files/co-system-administrators-guide-to-IT-automation-ebook-1933814OM-202503-en.pdf)
+* [Red Hat Certified Engineer(RHCE) Ansible Automation Study Guide](https://developers.redhat.com/e-books/ansible-study-guide) 🥇⭐
 
 ### Videos
 
