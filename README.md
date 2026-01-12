@@ -80,9 +80,8 @@ Refer to our [Practice Framework](./about/aboutPractice.md) for a table of recom
 
 ## Use Cases
 
-* [Use Case with RBAC with an MVP view](./usecase/rbac-mvp2.md)
-* [Another Use Case with RBAC with an MVP view](./usecase/rbac-mvp.md)
-* [Use Case with RBAC deep dive into RACI](./usecase/rbac-raci.md)
+* [RBAC Conversations](./usecase/aap-rbac/rbac.md)
+* [Ansible Zero Trust Conversations](./usecase/ansible-zt/ansible-zt.md)
 
 ---
 > :link: *[This repo in web format](https://ppremru.github.io/LaunchAdoption-AAP/)*  
