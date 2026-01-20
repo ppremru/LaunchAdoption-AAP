@@ -35,7 +35,7 @@ gantt
     axisFormat  %m
     
     section Stage 1: Visibility
-    Platform Install & Git Setup      :active, s1, 2026-01-01, 30d
+    Platform Foundation      :active, s1, 2026-01-01, 30d
     Read-Only Audits (RHEL/Win/Net)  :s2, after s1, 60d
     
     section Stage 2: Standardization
