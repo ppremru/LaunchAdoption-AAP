@@ -10,7 +10,7 @@
 
 ```mermaid
 gantt
-    title Week 1-4: Platform Genesis
+    title Week 1-4: Platform Foundation
     dateFormat  YYYY-MM-DD
     axisFormat  Week %U
     
