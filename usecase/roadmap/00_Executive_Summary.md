@@ -20,7 +20,7 @@ To transition from manual, independent administration to a **Unified Automation 
 
 ### Phases
 
-| Phase | Milestone | Focus | Strategic Value |
+| Phase | Milestone | OUTPUT |OUTCOME |
 | :--- | :--- | :--- | :--- |
 | **Stage 1** | **Foundational Visibility** | Read-only audits & Shared Git Repository. | **Risk Reduction:** Unified visibility and assessment across all domains. |
 | **Stage 2** | **Standardized Operations** | Active patching & shared configuration roles. | **Efficiency:** Recovery of hours spent on repetitive day-to-day tasks. |
