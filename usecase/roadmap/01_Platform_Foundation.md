@@ -1,4 +1,4 @@
-# Platform Foundation: Establishing the Unified Environment
+# Stage 1: Platform Foundation
 
 **Document:** 01_Platform_Foundation.md  
 **Timeline:** Weeks 1–4  
