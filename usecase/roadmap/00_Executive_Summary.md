@@ -51,7 +51,7 @@ gantt
 
 #### **Stage 1: Foundational Visibility (Months 1–3)**
 
-* **Weeks 1–4:** **Platform Genesis** – Deployment of AAP Controller and Private Automation Hub. Establishing the Unified Git Repository.
+* **Weeks 1–4:** **Platform Foundation** – Deployment of AAP Controller and Private Automation Hub. Establishing the Unified Git Repository.
 * **Weeks 5–12:** **Operational Insights** – Creation of "Read-Only" assessment playbooks. Developing cross-platform health-check reports for RHEL, Windows, and Network assets.
 
 #### **Stage 2: Standardized Operations (Months 4–7)**
