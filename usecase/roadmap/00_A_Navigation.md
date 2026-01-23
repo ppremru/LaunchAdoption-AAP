@@ -1,5 +1,7 @@
 # 📖 Navigation Menu
 
+[BRAINSTORMING DIAGRAM](./Onboarding_Ansible_Brainstorming.pdf)  
+
 | Order | File Name | Description | Audience |
 | :--- | :--- | :--- | :--- |
 | 00 | [**Executive Summary**](00_Executive_Summary.md) | High-level mission, roadmap, and ROI framework. | Leadership / Lead |
