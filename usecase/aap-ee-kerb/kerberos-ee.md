@@ -6,36 +6,32 @@ This guide walks you through creating a custom **Execution Environment (EE)**—
 
 ---
 
-<a id="table-of-contents"></a>
 ## Table of Contents
 
-* [Prerequisites & Requirements](#prerequisites)
+* [Prerequisites and Requirements](#prerequisites-and-requirements)
   * [Standard Requirements](#standard-requirements)
-  * [Disconnected (Air-Gapped) Environment Requirements](#disconnected-requirements)
-* [Step 1: Create the Kerberos Configuration File (`krb5.conf`)](#step-1)
-* [Step 2: Define the Execution Environment (`execution-environment.yml`)](#step-2)
-* [Step 3: Build and Publish the Container Image](#step-3)
-* [Step 4: Configure AAP Controller UI](#step-4)
-* [Step 5: Set Up Inventory Connection Variables](#step-5)
-* [Important Tips & Disconnected Operational Notes](#tips-and-notes)
-* [References & Further Reading](#references)
+  * [Disconnected Requirements](#disconnected-requirements)
+* [Step 1: Create the Kerberos Configuration File krb5.conf](#step-1-create-the-kerberos-configuration-file-krb5conf)
+* [Step 2: Define the Execution Environment execution-environment.yml](#step-2-define-the-execution-environment-execution-environmentyml)
+* [Step 3: Build and Publish the Container Image](#step-3-build-and-publish-the-container-image)
+* [Step 4: Configure AAP Controller UI](#step-4-configure-aap-controller-ui)
+* [Step 5: Set Up Inventory Connection Variables](#step-5-set-up-inventory-connection-variables)
+* [Important Tips and Disconnected Operational Notes](#important-tips-and-disconnected-operational-notes)
+* [References and Further Reading](#references-and-further-reading)
 
 ---
 
-<a id="prerequisites"></a>
-## Prerequisites & Requirements
+## Prerequisites and Requirements
 
 Before starting, ensure all required components are in place.
 
-<a id="standard-requirements"></a>
 ### Standard Requirements
 * **Ansible Automation Platform:** A working installation of Red Hat AAP 2.x.
 * **Build Workstation:** Access to a Linux host or workstation with `ansible-builder` and `podman` installed.
 * **Active Directory Service Account:** A domain account created in Active Directory with access permissions on target Windows hosts.
 * **Target Windows Hosts:** Endpoints configured with WinRM enabled over HTTPS (port 5986).
 
-<a id="disconnected-requirements"></a>
-### Disconnected (Air-Gapped) Environment Requirements
+### Disconnected Requirements
 In environments without direct internet access, ensure the following local infrastructure is configured before building:
 * **Internal Container Registry:** Red Hat Quay or Private Automation Hub accessible by both your build workstation and AAP execution nodes.
 * **Mirrored Base Container Image:** The base EE image (`ee-supported-rhel9`) must be mirrored from `registry.redhat.io` into your internal container registry.
@@ -46,8 +42,7 @@ In environments without direct internet access, ensure the following local infra
 
 ---
 
-<a id="step-1"></a>
-## Step 1: Create the Kerberos Configuration File (`krb5.conf`)
+## Step 1: Create the Kerberos Configuration File krb5.conf
 
 Kerberos requires explicit domain architecture details provided in `krb5.conf`. Domain names in Kerberos configurations must **always be written in ALL CAPS**.
 
@@ -76,8 +71,7 @@ Create a file named `krb5.conf` in your project folder:
 
 ---
 
-<a id="step-2"></a>
-## Step 2: Define the Execution Environment (`execution-environment.yml`)
+## Step 2: Define the Execution Environment execution-environment.yml
 
 The `execution-environment.yml` file instructs `ansible-builder` which collections, Python libraries, and system RPMs to install.
 
@@ -114,7 +108,6 @@ additional_build_steps:
 
 ---
 
-<a id="step-3"></a>
 ## Step 3: Build and Publish the Container Image
 
 Run `ansible-builder` to assemble the execution environment image, then push it to your registry.
@@ -129,7 +122,6 @@ podman push [my-registry.com/my-project/windows-kerberos-ee:latest](https://my-r
 
 ---
 
-<a id="step-4"></a>
 ## Step 4: Configure AAP Controller UI
 
 Log into the AAP Controller web UI to register the execution environment and configure credentials:
@@ -145,7 +137,6 @@ Log into the AAP Controller web UI to register the execution environment and con
 
 ---
 
-<a id="step-5"></a>
 ## Step 5: Set Up Inventory Connection Variables
 
 Assign connection variables in your AAP Inventory at either the Group or Host level:
@@ -159,8 +150,7 @@ Assign connection variables in your AAP Inventory at either the Group or Host le
 
 ---
 
-<a id="tips-and-notes"></a>
-## Important Tips & Disconnected Operational Notes
+## Important Tips and Disconnected Operational Notes
 
 * **FQDN Mandate:** Inventory target entries must use Fully Qualified Domain Names (e.g., `server01.yourdomain.com`), not IP addresses. Kerberos requires FQDNs to generate Service Principal Name (SPN) tickets.
 * **Time Synchronization (NTP):** System time across AAP execution nodes and Active Directory Domain Controllers must be synchronized via NTP within 5 minutes. Time drift will cause Kerberos tickets to be immediately rejected.
@@ -169,8 +159,7 @@ Assign connection variables in your AAP Inventory at either the Group or Host le
 
 ---
 
-<a id="references"></a>
-## References & Further Reading
+## References and Further Reading
 
 * **Red Hat Technical Blog:** [Using Kerberos for Windows in Ansible Automation Platform 2](https://www.redhat.com/en/blog/using-kerberos-for-windows-in-ansible-automation-platform-2)
 * **Ansible Community Documentation:** [Ansible Windows Kerberos Authentication Guide](https://docs.ansible.com/projects/ansible/latest/os_guide/windows_winrm_kerberos.html)
