@@ -85,8 +85,6 @@ Refer to our [Practice Framework](./about/aboutPractice.md) for a table of recom
 * [AAP Roadmap](./usecase/roadmap/00_A_Navigation.md)
 * [AAP Kerberos EE](./usecase/aap-ee-kerb/kerberos-ee.md)
 
-
-
 ---
 > :link: *[This repo in web format](https://ppremru.github.io/LaunchAdoption-AAP/)*  
 > :star: *Favorites*  
