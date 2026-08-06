@@ -83,6 +83,9 @@ Refer to our [Practice Framework](./about/aboutPractice.md) for a table of recom
 * [RBAC Conversations](./usecase/aap-rbac/rbac.md)
 * [Ansible Zero Trust Conversations](./usecase/ansible-zt/ansible-zt.md)
 * [AAP Roadmap](./usecase/roadmap/00_A_Navigation.md)
+* [AAP Kerberos EE](./usecase/aap-ee-kerb/kerberos-ee.md)
+
+
 
 ---
 > :link: *[This repo in web format](https://ppremru.github.io/LaunchAdoption-AAP/)*  
