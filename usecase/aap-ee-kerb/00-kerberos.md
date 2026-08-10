@@ -10,7 +10,7 @@ This guide is structured for Windows administrators and automation engineers tra
 
 The complete guide is organized into three sequential modules:
 
-### 1. [Use Case: Execution Environment Build Guide](01-execution-environment.md)
+### 1. [Execution Environment Build Guide](01-execution-environment.md)
 
 * **Focus:** Compiling a custom Execution Environment container image with `ansible-builder`, system Kerberos binaries (`krb5-workstation`), Python dependencies (`pywinrm[kerberos]`), and a pre-configured `/etc/krb5.conf`.
 * **Key Topics:**
@@ -18,7 +18,7 @@ The complete guide is organized into three sequential modules:
   * Kerberos realm configuration (`krb5.conf`) rules
   * Container definition (`execution-environment.yml`) and registry publishing
 
-### 2. [Use Case: Inventory & Playbooks Guide](02-inventory-and-playbooks.md)
+### 2. [Inventory & Playbooks Guide](02-inventory-and-playbooks.md)
 
 * **Focus:** Structuring inventory connection variables for Kerberos authentication and writing domain-ready Windows playbooks.
 * **Key Topics:**
@@ -26,7 +26,7 @@ The complete guide is organized into three sequential modules:
   * Target host domain prerequisites and the FQDN mandate
   * Ready-to-use sample playbooks for connectivity and service management
 
-### 3. [Use Case: AAP 2 UI Integration & Execution Guide](03-aap-integration.md)
+### 3. [AAP 2 UI Integration & Execution Guide](03-aap-integration.md)
 
 * **Focus:** End-to-end integration inside the AAP 2 Controller web console and job execution mechanics.
 * **Key Topics:**
@@ -34,6 +34,24 @@ The complete guide is organized into three sequential modules:
   * Building and launching Job Templates
   * Interactive job execution flow and automated `kinit` ticket acquisition
   * Common failure troubleshooting matrix and air-gapped checklist
+
+### 4. Prerequisites [Enterprise Infrastructure & Team Alignment Guide](04-infrastructure-and-team-prerequisites.md)
+
+* **Focus:** Prerequisites.  Cross-team technical alignment, network firewall requirements, Active Directory prerequisites, and enterprise PKI/CRL trust configurations.
+* **Key Topics:**
+  * Non-technical stakeholder and domain team alignment matrix
+  * Network port matrix and DNS resolution requirements
+  * Active Directory Kerberos formatting and NTP clock sync rules
+  * Enterprise CA trust store embedding and CRL reachability handling
+
+### 5. Prerequisites [Disconnected Supply Chain & Air-Gapped Build Guide](05-airgapped-supply-chain-guide.md)
+
+* **Focus:** Prerequisites.  Offline supply chain management for building Execution Environments without internet access.
+* **Key Topics:**
+  * Base image mirroring using `skopeo`
+  * Offline Python wheel bundling for `pywinrm[kerberos]`
+  * Local Ansible Collection packaging and `requirements.yml` setup
+  * Offline RHEL RPM repository handling and pre-flight validation
 
 ---
 
@@ -50,16 +68,5 @@ flowchart LR
     M1 --> M2 --> M3
 
 ```
-
----
-
-## Golden Rules for Kerberos in AAP 2
-
-Always keep these four non-negotiable rules in mind when working with Kerberos and Ansible:
-
-1. **ALL-CAPS Realm Names:** Realm names in `krb5.conf` and Machine Credential usernames MUST be uppercase (e.g., `ansible_svc@YOURDOMAIN.COM`). Kerberos is case-sensitive.
-2. **FQDNs Required in Inventories:** Target hosts MUST use Fully Qualified Domain Names (e.g., `win01.yourdomain.com`). Kerberos requires FQDNs to generate Service Principal Name (SPN) tickets; IP addresses will always fail.
-3. **NTP Clock Sync:** Time drift across AAP execution nodes, Active Directory Domain Controllers, and target Windows servers must remain under 5 minutes.
-4. **Internal DNS Resolution:** Execution Environment containers must resolve host FQDNs and Active Directory Domain Controllers via internal DNS.
 
 ---

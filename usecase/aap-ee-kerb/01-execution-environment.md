@@ -1,4 +1,4 @@
-# Use Case: Execution Environment Build Guide
+# Execution Environment Build Guide
 
 This guide details the process of compiling a custom Execution Environment (EE) container image tailored for Active Directory-joined Windows automation using Kerberos over WinRM HTTPS.
 

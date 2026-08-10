@@ -1,4 +1,4 @@
-# Use Case: AAP 2 UI Integration & Execution Guide
+# AAP 2 UI Integration & Execution Guide
 
 This guide provides a high-level walkthrough of how to integrate your custom Execution Environment (EE), inventory, playbooks, and Active Directory credentials into Red Hat Ansible Automation Platform (AAP 2) to execute end-to-end Windows automation.
 

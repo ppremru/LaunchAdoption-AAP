@@ -1,4 +1,4 @@
-# Use Case: Inventory & Playbooks Guide
+# Inventory & Playbooks Guide
 
 This guide explains how to structure your Ansible inventory for Windows Kerberos authentication over WinRM and provides ready-to-use example playbooks.
 
