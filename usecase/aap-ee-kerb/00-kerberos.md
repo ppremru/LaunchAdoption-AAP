@@ -1,14 +1,14 @@
-# Use Case: Windows Kerberos Automation in AAP 2
+# Use Case: Windows Kerberos Automation Execution Environment
 
-Welcome to the enterprise implementation guide for automating Active Directory-joined Windows endpoints using Ansible Automation Platform (AAP 2) with native Kerberos over WinRM HTTPS (Port 5986).
+This repo provides guides for automating Active Directory-joined Windows endpoints using Ansible Automation Platform (AAP 2) with native Kerberos over WinRM HTTPS (Port 5986).
 
-This guide is structured for Windows administrators and automation engineers transitioning to containerized execution environments. It covers the full lifecycle—from building custom execution containers to running playbooks in connected or air-gapped environments.
+It covers the lifecycle—from building custom execution containers to running playbooks with focus on air-gapped environments.
 
 ---
 
-## Documentation Index
+## Index of Topics
 
-The complete guide is organized into three sequential modules:
+Topics:
 
 ### 1. [Execution Environment Build Guide](01-execution-environment.md)
 
