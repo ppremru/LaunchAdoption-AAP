@@ -1,4 +1,4 @@
-# Use Case:  Master Index & Active Directory Integration Overview
+# 00 - Master Index & Active Directory Integration Overview
 
 This suite provides an implementation framework for integrating **Active Directory (AD)** and **Identity Providers (IdP)** with **Ansible Automation Platform 2 (AAP 2)**. It follows a progressive **Crawl, Walk, Run** adoption model—moving from read-only LDAPS authentication to automated group mapping and federated Single Sign-On (SSO).
 
@@ -6,16 +6,16 @@ This suite provides an implementation framework for integrating **Active Directo
 
 ## Table of Contents
 
-| Document | Focus / Summary |
-| :--- | :--- |
-| **[01 - Phase 1: Crawl (LDAPS Baseline)](01-ldaps-baseline-auth.md)** | Firewall matrix, Root CA trust injection, unprivileged bind account, and user authentication. |
-| **[02 - Phase 2: Walk (RBAC & Group Mapping)](02-rbac-and-group-mapping.md)** | Mapping AD Security Groups to AAP Organizations, Teams, and System Admins with auto-revocation. |
-| **[03 - Phase 3: Run (SAML / SSO Federation)](03-saml-oidc-sso-federation.md)** | Enterprise SSO setup (Entra ID/Okta), SAML claims mapping, JIT provisioning, and MFA. |
-| **[04 - Pre-Flight Diagnostics & Debugging](04-troubleshooting-and-diagnostics.md)** | Terminal tests (`ldapsearch`, `openssl`), debug log configuration, and common error fixes. |
-| **[05 - Configuration-as-Code Automation](05-controller-as-code-automation.md)** | Automating identity settings using `infra.controller_configuration` and GitOps pipelines. |
-| **[06 - Entra ID SAML App Manifest](06-entra-id-app-manifest-template.md)** | Pre-configured Microsoft Entra ID JSON manifest and Microsoft Graph PowerShell scripts. |
-| **[07 - Execution Environment Kerberos](07-ee-sssd-kerberos-integration.md)** | Container image build (`ansible-builder`), `krb5.conf`, Keytabs, and passwordless WinRM/SSH auth. |
-| **[08 - Executive Briefing Slides](08-executive-briefing-slides.md)** | Executive architecture deck, adoption risk matrix, and implementation timeline. |
+| # | Topic | Summary |
+| :---: | :--- | :--- |
+| **01** | **[Phase 1: LDAPS Baseline Authentication](01-ldaps-baseline-auth.md)** | Network firewall matrix, Root CA trust store injection, unprivileged bind account, and user lookup setup. |
+| **02** | **[Phase 2: RBAC & Group Mapping](02-rbac-and-group-mapping.md)** | Mapping AD Security Groups to AAP Organizations, Teams, and System Admins with automated revocation. |
+| **03** | **[Phase 3: SAML / SSO Federation](03-saml-oidc-sso-federation.md)** | Enterprise SSO setup (Entra ID/Okta), SAML claims mapping, JIT provisioning, and MFA enforcement. |
+| **04** | **[Pre-Flight Diagnostics & Debugging](04-troubleshooting-and-diagnostics.md)** | Terminal CLI tests (`ldapsearch`, `openssl`), debug log configuration, and common error fixes. |
+| **05** | **[Configuration-as-Code Automation](05-controller-as-code-automation.md)** | Automating identity settings using `infra.controller_configuration` and GitOps pipelines. |
+| **06** | **[Entra ID SAML App Manifest](06-entra-id-app-manifest-template.md)** | Pre-configured Microsoft Entra ID JSON manifest and Microsoft Graph PowerShell scripts. |
+| **07** | **[Execution Environment Kerberos](07-ee-sssd-kerberos-integration.md)** | Container image build (`ansible-builder`), `krb5.conf`, Keytabs, and passwordless WinRM/SSH authentication. |
+| **08** | **[Executive Briefing Slides](08-executive-briefing-slides.md)** | Executive architecture deck, adoption risk matrix, stakeholder value positioning, and timeline. |
 
 ---
 
