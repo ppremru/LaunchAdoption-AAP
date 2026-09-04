@@ -1,63 +1,44 @@
-# Prerequisites. Enterprise Infrastructure & Team Alignment Guide
+# Infrastructure Prerequisites
 
-This guide translates Ansible Automation Platform (AAP) requirements into standard IT infrastructure terms. Use these sections to request firewall openings, Active Directory accounts, and PKI assets from enterprise domain teams—even if those teams have zero prior experience with AAP or containerized automation.
+Standard Active Directory, WinRM, and network prerequisites required for remote domain management.
 
 ---
 
-## 1. Non-Technical Stakeholder Alignment Matrix
+## 1. Infrastructure & Service Requirements
 
-When presenting requirements to system administrators, network engineers, or security officers, use standard enterprise terminology instead of AAP-specific jargon.
-
-| AAP Technical Term | Standard IT Equivalent | What to Request from the Respective Team |
+| Component | Scope | Technical Requirement |
 | :--- | :--- | :--- |
-| **AAP Execution Node** | RHEL Linux Server / Worker Node | Network egress rules to Active Directory Domain Controllers and Windows endpoints. |
-| **Execution Environment (EE)** | Standalone Podman/Docker Container | An internal container registry repository (e.g., Quay, Harbor, Nexus) to store custom images. |
-| **Machine Credential** | Domain Service Account | A standard Active Directory user account with permissions to manage target Windows services. |
-| **Kerberos Transport** | Encrypted WinRM over Port 5986 | Target Windows endpoints configured with WinRM HTTPS listeners and port 5986 open in host firewalls. |
+| **Active Directory** | Accounts & SPNs | Standard unprivileged AD service account; target endpoints require registered WinRM Service Principal Names. |
+| **Network & Firewall** | Port Access | Outbound connectivity on TCP/UDP 88, 464, 389/636, 5986, and 53. Target endpoints require valid A and PTR DNS records. |
+| **PKI & Security** | Certificates | Base64 PEM-encoded Root/Intermediate CA certificates and unblocked HTTP access to CDP/CRL endpoints. |
+| **Container Platform** | Registry & Time | Internal container registry repository and NTP clock drift maintained under 5 minutes. |
 
 ---
 
-## 2. Domain A: Network & Firewall Matrix
+## 2. Network Firewall Matrix
 
-The AAP Execution Nodes (Linux servers running container jobs) must have line-of-sight network access to both Active Directory Domain Controllers and the target Windows endpoints.
+Outbound traffic required from the execution subnet:
 
-### Required Firewall Rules
+* **Port 88 (TCP/UDP):** Active Directory Domain Controllers (Kerberos ticket issuance)
+* **Port 464 (TCP/UDP):** Active Directory Domain Controllers (Kerberos password management)
+* **Port 389/636 (TCP/UDP):** Active Directory Domain Controllers (LDAP/LDAPS SPN discovery)
+* **Port 53 (TCP/UDP):** Internal DNS Servers (Domain and host resolution)
+* **Port 5986 (TCP):** Target Windows Endpoints (Encrypted WinRM HTTPS remoting)
+* **Port 80/443 (TCP):** Internal PKI Web Servers (Certificate Revocation List validation)
 
-Request the following network egress rules from the **AAP Execution Subnet**:
-
-* **Port 88 (TCP/UDP) — Kerberos:** AAP Nodes → Domain Controllers (Ticket acquisition)
-* **Port 464 (TCP/UDP) — Kerberos Password:** AAP Nodes → Domain Controllers (Credential management)
-* **Port 389/636 (TCP/UDP) — LDAP/LDAPS:** AAP Nodes → Domain Controllers (Service Principal Name discovery)
-* **Port 53 (TCP/UDP) — Internal DNS:** AAP Nodes → Internal DNS Servers (Host and DC resolution)
-* **Port 5986 (TCP) — WinRM HTTPS:** AAP Nodes → Target Windows Endpoints (Encrypted playbook execution)
-* **Port 80/443 (TCP) — HTTP/HTTPS:** AAP Nodes → Internal PKI Web Servers (Certificate Revocation Lists)
-
-> **The DNS Mandate:** Kerberos authentication **will fail** if target hosts are specified by IP address. The DNS servers assigned to the AAP Execution Nodes must resolve target Windows Fully Qualified Domain Names (e.g., `win01.yourdomain.com`) and return matching Reverse DNS (PTR) records.
+> **DNS Resolution Mandate:** Target endpoints must be referenced by Fully Qualified Domain Name (e.g., `win01.yourdomain.com`). Kerberos authentication rejects IP-based connections. Internal DNS servers must resolve both forward (A) and reverse (PTR) records.
 
 ---
 
-## 3. Domain B: Active Directory & Kerberos Requirements
+## 3. Active Directory & Kerberos Standards
 
-Active Directory domain administrators must ensure the service account and domain endpoints meet three strict Kerberos conditions:
-
-1. **ALL-CAPS Realm Formatting:** Kerberos is strictly case-sensitive. Active Directory domain names must be entered in **ALL CAPS** in all configuration files (e.g., `YOURDOMAIN.COM`).
-2. **NTP Clock Skew (< 5 Minutes):** Time drift between the AAP Linux nodes, Active Directory Domain Controllers, and target Windows servers **must be under 5 minutes**. Kerberos immediately rejects tickets if system times do not match.
-3. **WinRM Service Principal Names (SPNs):** Target Windows servers must have their WinRM Service Principal Names registered in Active Directory (typically created automatically when joining the domain or configuring WinRM listeners).
+* **Case-Sensitive Kerberos Realms:** AD domain names must be specified in **ALL CAPS** across configuration files (e.g., `YOURDOMAIN.COM`) per Kerberos RFC specifications.
+* **Kerberos Time Synchronization:** Clock skew across Domain Controllers, execution nodes, and target endpoints must not exceed 5 minutes.
+* **WinRM HTTPS Listeners:** Target endpoints must have active WinRM HTTPS listeners configured on port 5986.
 
 ---
 
-## 4. Domain C: Enterprise PKI & Certificate Revocation
+## 4. PKI & Certificate Validation
 
-Security teams enforcing strict TLS validation (`ansible_winrm_server_cert_validation: validate`) must supply the necessary certificate authority files.
-
-### Two Hard PKI Requirements
-
-1. **Root & Intermediate CA Certificates:** The PKI team must provide Base64 PEM-formatted (`.crt` or `.pem`) files for all internal issuing Certificate Authorities. These will be baked into the Execution Environment container image during compilation.
-2. **Reachable Certificate Revocation Lists (CRLs):**
-   * Target Windows certificates contain a **CRL Distribution Point (CDP)** URL (typically an internal HTTP web server).
-   * During the WinRM HTTPS connection, the Linux container attempts to fetch this list to verify the certificate has not been revoked.
-   * **The Air-Gap Trap:** If the CDP URL points to an unreachable external server or an unrouted internal subnet, the connection will hang for **30–60 seconds** before timing out. Ensure the CDP HTTP/LDAP URLs are reachable from the AAP execution subnet.
-
-> **Where Certificate Validation is Enforced:**
-> * **Execution Environment (`01-execution-environment.md`):** Stores the Root CA files so the container *has the capability* to trust the domain.
-> * **Inventory (`02-inventory-and-playbooks.md` / `03-aap-integration.md`):** Defines `ansible_winrm_server_cert_validation: validate` in inventory variables to instruct Ansible to *enforce* that trust check during job execution.
+* **Trusted Certificate Authorities:** Base64 PEM-encoded (`.crt`/`.pem`) issuing CA certificates are required for TLS trust verification.
+* **Reachable CRL Endpoints:** Certificate Revocation List (CRL) distribution points embedded in target certificates must be reachable over HTTP to prevent connection timeouts.
