@@ -1,178 +1,104 @@
-# Prerequisites. Disconnected Supply Chain & Air-Gapped Build Guide
+# Disconnected Supply Chain & Air-Gapped Build Guide
 
-When building an Execution Environment inside an air-gapped network, `ansible-builder` cannot pull images from `registry.redhat.io`, Python packages from `pypi.org`, or collections from `galaxy.ansible.com`.
-
-This guide details how to stage all build dependencies inside a disconnected supply chain.
+Procedures for packaging, staging, and building custom Execution Environments in air-gapped or network-isolated enterprise environments.
 
 ---
 
-## 1. Base Image Synchronization (`skopeo` / `podman`)
+## 1. Base Container Image Mirroring
 
-Mirror the Red Hat base image from an internet-connected host into your internal container registry (e.g., Quay, Harbor, or Nexus).
+Transfer the Red Hat Ansible Automation Platform base image from an internet-connected staging host to your internal enterprise registry using `skopeo`.
 
-* **Step 1: On an Internet-Connected Staging Host**
-  ```bash
-  # Log in to Red Hat Registry
-  podman login registry.redhat.io
-
-  # Export the base image to a local directory archive
-  skopeo copy \
-    docker://registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel9:latest \
-    dir:/tmp/ee-base-image
-  ```
-
-* **Step 2: Transfer Files Across the Air Gap**
-  Copy the `/tmp/ee-base-image` folder via approved file-transfer mechanisms (such as a bastion host or secure media) to the disconnected network.
-
-* **Step 3: On the Disconnected Build Host**
-  ```bash
-  # Push the local directory archive to your internal registry
-  skopeo copy \
-    dir:/tmp/ee-base-image \
-    docker://[my-registry.com/my-project/ee-supported-rhel9:latest](https://my-registry.com/my-project/ee-supported-rhel9:latest)
-  ```
-
-* **Step 4: Update `execution-environment.yml`**
-  Point the base image default to your internal registry URL:
-  ```yaml
-  build_arg_defaults:
-    EE_BASE_IMAGE: '[my-registry.com/my-project/ee-supported-rhel9:latest](https://my-registry.com/my-project/ee-supported-rhel9:latest)'
-  ```
-
----
-
-## 2. Python Dependencies (`pywinrm[kerberos]`)
-
-Choose one of two strategies depending on whether your organization operates an internal PyPI proxy server.
-
-### Option A: Internal PyPI Mirror (Nexus / Artifactory)
-If an internal PyPI repository exists, inject a custom `pip.conf` into the container context:
-
-1. Create a `pip.conf` file inside your local `ee-build/` folder:
-   ```ini
-   [global]
-   index-url = [https://nexus.yourdomain.com/repository/pypi-group/simple](https://nexus.yourdomain.com/repository/pypi-group/simple)
-   trusted-host = nexus.yourdomain.com
-   ```
-2. Copy `pip.conf` into the image using `execution-environment.yml`:
-   ```yaml
-   additional_build_steps:
-     prepend_builder:
-       - COPY pip.conf /etc/pip.conf
-     prepend_final:
-       - COPY pip.conf /etc/pip.conf
-   ```
-
-### Option B: Bundled Wheels Directory (No PyPI Server Required)
-If no PyPI server exists, download compiled `.whl` files on a connected host and bundle them directly into the build folder:
-
-1. **On an Internet-Connected Host:**
-   ```bash
-   pip download -d ./wheels "pywinrm[kerberos]"
-   ```
-2. **Transfer:** Copy the `wheels/` directory into your disconnected `ee-build/` folder.
-3. **In `execution-environment.yml`:** Instruct `pip` to install offline from local files:
-   ```yaml
-   additional_build_steps:
-     prepend_final:
-       - COPY wheels /tmp/wheels
-       - RUN pip install --no-index --find-links=/tmp/wheels pywinrm[kerberos]
-   ```
-
----
-
-## 3. Offline Ansible Collections (`ansible.windows` / `microsoft.ad`)
-
-Instead of reaching out to Ansible Galaxy, package collection tarballs locally:
-
-1. **On an Internet-Connected Host:**
-   ```bash
-   ansible-galaxy collection download ansible.windows -p ./collections
-   ansible-galaxy collection download microsoft.ad -p ./collections
-   ```
-2. **Transfer:** Copy the `collections/` directory into your `ee-build/` folder.
-3. **Update `requirements.yml`:** Reference local archive paths instead of Galaxy names:
-   ```yaml
-   ---
-   collections:
-     - name: ./collections/ansible-windows-2.1.0.tar.gz
-     - name: ./collections/microsoft-ad-1.3.0.tar.gz
-   ```
-
----
-
-## 4. Offline RHEL RPM Repositories (`krb5-workstation`)
-
-Red Hat containers attempt to reach Red Hat CDN repos by default. In air-gapped networks, these checks will fail.
-
-* **Satellite Registration:** If the host server running `ansible-builder` is registered to an internal Red Hat Satellite server, the build process inherits local system subscriptions automatically.
-* **Custom RPM Repositories:** If using local HTTP yum mirrors, replace default UBI repositories inside `execution-environment.yml`:
-  ```yaml
-  additional_build_steps:
-    prepend_base:
-      - RUN rm -f /etc/yum.repos.d/ubi.repo
-      - COPY internal-rhel9.repo /etc/yum.repos.d/internal-rhel9.repo
-  ```
-
----
-
-## 5. Offline Pre-Flight Verification Checklist
-
-Run these commands inside a test container on the disconnected build host to verify infrastructure readiness **before** launching full AAP jobs.
-
-### Test 1: Verify Base Image and DNS Access
 ```bash
-# Verify internal registry base image accessibility
-skopeo inspect docker://[my-registry.com/my-project/ee-supported-rhel9:latest](https://my-registry.com/my-project/ee-supported-rhel9:latest)
+# 1. Login to Red Hat Registry and Internal Registry
+skopeo login registry.redhat.io
+skopeo login my-registry.com
 
-# Verify DNS resolution and TCP port access to AD and Target Hosts
+# 2. Mirror base image directly between registries
+skopeo copy \
+  docker://registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel9:latest \
+  docker://[my-registry.com/automation/ee-supported-rhel9:latest](https://my-registry.com/automation/ee-supported-rhel9:latest)
+```
+
+> **Tarball Transfer Alternative:** If direct network transfer between registries is blocked, save the image as a tar archive to offline media:
+> ```bash
+> podman pull registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel9:latest
+> podman save -o ee-supported-rhel9.tar registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel9:latest
+> # Import on internal network:
+> podman load -i ee-supported-rhel9.tar
+> podman tag registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel9:latest [my-registry.com/automation/ee-supported-rhel9:latest](https://my-registry.com/automation/ee-supported-rhel9:latest)
+> podman push [my-registry.com/automation/ee-supported-rhel9:latest](https://my-registry.com/automation/ee-supported-rhel9:latest)
+> ```
+
+---
+
+## 2. Offline Python Wheel Packaging
+
+Download `pywinrm[kerberos]` and associated compiled binaries on an internet-connected host, then stage the wheel files for internal build access.
+
+```bash
+# On Internet-Connected Staging Host:
+mkdir -p ./python-wheels
+pip download \
+  --dest ./python-wheels \
+  --only-binary=:all: \
+  --platform manylinux2014_x86_64 \
+  --python-version 3.11 \
+  "pywinrm[kerberos]"
+```
+
+---
+
+## 3. Disconnected Build Definition (`execution-environment.yml`)
+
+Configure `execution-environment.yml` to utilize internal container registries, local yum repositories, and offline Python wheel archives.
+
+```yaml
+---
+version: 3
+
+build_arg_defaults:
+  EE_BASE_IMAGE: '[my-registry.com/automation/ee-supported-rhel9:latest](https://my-registry.com/automation/ee-supported-rhel9:latest)'
+
+dependencies:
+  ansible_core:
+    package_pip: ansible-core
+  system:
+    - krb5-workstation
+    - krb5-libs
+    - ca-certificates
+  python:
+    - ./python-wheels/pywinrm-*.whl
+    - ./python-wheels/requests_kerberos-*.whl
+
+additional_build_steps:
+  prepend_base:
+    - COPY internal-root-ca.crt /etc/pki/ca-trust/source/anchors/internal-root-ca.crt
+    - RUN update-ca-trust
+    - COPY ./python-wheels /tmp/python-wheels
+  append_final:
+    - COPY krb5.conf /etc/krb5.conf
+    - RUN rm -rf /tmp/python-wheels
+```
+
+---
+
+## 4. Air-Gapped Network Diagnostics
+
+Execute these CLI diagnostics from the execution node prior to running playbooks to confirm network pathways and internal repository access.
+
+```bash
+# 1. Test DNS FQDN resolution for Domain Controllers
 dig +short dc01.yourdomain.com
-nc -zv dc01.yourdomain.com 88
-nc -zv win01.yourdomain.com 5986
+
+# 2. Test reverse PTR record lookup
+dig +short -x <DC_IP_ADDRESS>
+
+# 3. Test egress connectivity to WinRM HTTPS port
+nc -zvw3 win01.yourdomain.com 5986
+
+# 4. Test Kerberos port egress to Domain Controller
+nc -zvw3 dc01.yourdomain.com 88
+
+# 5. Validate internal HTTP CRL distribution endpoint
+curl -I [http://crl.yourdomain.com/pki/internal-ca.crl](http://crl.yourdomain.com/pki/internal-ca.crl)
 ```
-
-### Test 2: Verify Offline Python Wheel Installation
-```bash
-# Test dry-run installation of local wheel files without network connectivity
-python3 -m pip install --no-index --find-links=./wheels pywinrm[kerberos] --dry-run
-```
-
-### Test 3: Verify Kerberos Ticket & CRL Fetch
-```bash
-# Test ticket acquisition against Active Directory
-kinit ansible_svc@YOURDOMAIN.COM
-klist
-
-# Test HTTP access to PKI Certificate Revocation List
-curl -I [http://pki.yourdomain.com/crl/corp_root.crl](http://pki.yourdomain.com/crl/corp_root.crl)
-```
-
-### Test 4: Verify WinRM Python Connection
-```python
-# Test WinRM HTTPS handshake inside Python shell
-import winrm
-
-s = winrm.Session(
-    '[https://win01.yourdomain.com:5986/wsman](https://win01.yourdomain.com:5986/wsman)',
-    transport='kerberos',
-    server_cert_validation='validate'
-)
-r = s.run_cmd('ipconfig', ['/all'])
-print("Status Code:", r.status_code)
-```
-
----
-
-## 6. Official Reference Documentation & Learning Material
-
-For further reading on disconnected enterprise deployments:
-
-* **Red Hat Official Docs:**
-  * [Red Hat AAP Installation Guide: Disconnected Installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.4/html/red_hat_ansible_automation_platform_installation_guide/disconnected-installation)
-  * [Red Hat AAP Guide: Building Ansible Execution Environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.4/html/building_ansible_execution_environments/index)
-* **Technical Industry Guides:**
-  * *The Anatomy of Automation Execution Environments* (Red Hat Blog)
-  * *Ansible-Builder in a Disconnected Environment* (Pat Harrison Blog)
-* **Recommended Video Search Terms:**
-  * "Building Custom Execution Environments for Air-Gapped Networks"
-  * "Ansible Builder v3 Schema Deep Dive"
